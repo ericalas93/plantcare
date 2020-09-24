@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,22 @@
 		1015301F2510039A00CD0EEA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1015301E2510039A00CD0EEA /* Preview Assets.xcassets */; };
 		1015302A2510039A00CD0EEA /* PlantCareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101530292510039A00CD0EEA /* PlantCareTests.swift */; };
 		101530352510039A00CD0EEA /* PlantCareUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101530342510039A00CD0EEA /* PlantCareUITests.swift */; };
+		1015304325100DED00CD0EEA /* FloatingTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1015304225100DED00CD0EEA /* FloatingTabbar.swift */; };
+		1015304525102B6B00CD0EEA /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1015304425102B6B00CD0EEA /* ViewRouter.swift */; };
+		1015304725102F0800CD0EEA /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1015304625102F0800CD0EEA /* HomeView.swift */; };
+		101530492511040C00CD0EEA /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101530482511040C00CD0EEA /* Modifiers.swift */; };
+		1015304B2511056600CD0EEA /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1015304A2511056600CD0EEA /* SummaryView.swift */; };
+		104DE831251BFA270062FE43 /* Plants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104DE830251BFA270062FE43 /* Plants.swift */; };
+		104DE839251BFB0D0062FE43 /* PlantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104DE838251BFB0D0062FE43 /* PlantViewModel.swift */; };
+		104DE83E251BFC260062FE43 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104DE83D251BFC260062FE43 /* ApiClient.swift */; };
+		104DE843251BFC510062FE43 /* PlantDBAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104DE842251BFC510062FE43 /* PlantDBAPI.swift */; };
+		10830BBB251B89110029BC4D /* PlantRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10830BBA251B89110029BC4D /* PlantRingView.swift */; };
+		10B5B8D7251CE2F6001F7F39 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 10B5B8D6251CE2F6001F7F39 /* URLImage */; };
+		10B5B8DD251CEF6A001F7F39 /* PlantInformationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B5B8DC251CEF6A001F7F39 /* PlantInformationCard.swift */; };
+		10B5B8E5251D00E1001F7F39 /* PlantDetailBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B5B8E4251D00E1001F7F39 /* PlantDetailBackButton.swift */; };
+		10C8E9C9251B9F6900AF4AC1 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C8E9C8251B9F6900AF4AC1 /* Utilities.swift */; };
+		10E9D0C3251A5D0A00CDBE88 /* PlantDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E9D0C2251A5D0A00CDBE88 /* PlantDetailView.swift */; };
+		10E9D0C8251A5D5F00CDBE88 /* PlantListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E9D0C7251A5D5F00CDBE88 /* PlantListItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +61,21 @@
 		101530302510039A00CD0EEA /* PlantCareUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlantCareUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		101530342510039A00CD0EEA /* PlantCareUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCareUITests.swift; sourceTree = "<group>"; };
 		101530362510039A00CD0EEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1015304225100DED00CD0EEA /* FloatingTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTabbar.swift; sourceTree = "<group>"; };
+		1015304425102B6B00CD0EEA /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
+		1015304625102F0800CD0EEA /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		101530482511040C00CD0EEA /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
+		1015304A2511056600CD0EEA /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
+		104DE830251BFA270062FE43 /* Plants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plants.swift; sourceTree = "<group>"; };
+		104DE838251BFB0D0062FE43 /* PlantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantViewModel.swift; sourceTree = "<group>"; };
+		104DE83D251BFC260062FE43 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
+		104DE842251BFC510062FE43 /* PlantDBAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDBAPI.swift; sourceTree = "<group>"; };
+		10830BBA251B89110029BC4D /* PlantRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantRingView.swift; sourceTree = "<group>"; };
+		10B5B8DC251CEF6A001F7F39 /* PlantInformationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantInformationCard.swift; sourceTree = "<group>"; };
+		10B5B8E4251D00E1001F7F39 /* PlantDetailBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailBackButton.swift; sourceTree = "<group>"; };
+		10C8E9C8251B9F6900AF4AC1 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		10E9D0C2251A5D0A00CDBE88 /* PlantDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailView.swift; sourceTree = "<group>"; };
+		10E9D0C7251A5D5F00CDBE88 /* PlantListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantListItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10B5B8D7251CE2F6001F7F39 /* URLImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,11 +127,21 @@
 		101530162510039900CD0EEA /* PlantCare */ = {
 			isa = PBXGroup;
 			children = (
+				104DE82F251BFA030062FE43 /* Plants */,
 				101530172510039900CD0EEA /* PlantCareApp.swift */,
 				101530192510039900CD0EEA /* ContentView.swift */,
+				1015304625102F0800CD0EEA /* HomeView.swift */,
+				1015304425102B6B00CD0EEA /* ViewRouter.swift */,
+				1015304225100DED00CD0EEA /* FloatingTabbar.swift */,
 				1015301B2510039A00CD0EEA /* Assets.xcassets */,
 				101530202510039A00CD0EEA /* Info.plist */,
 				1015301D2510039A00CD0EEA /* Preview Content */,
+				101530482511040C00CD0EEA /* Modifiers.swift */,
+				1015304A2511056600CD0EEA /* SummaryView.swift */,
+				10B5B8DB251CEF52001F7F39 /* DetailsView */,
+				10E9D0C7251A5D5F00CDBE88 /* PlantListItemView.swift */,
+				10830BBA251B89110029BC4D /* PlantRingView.swift */,
+				10C8E9C8251B9F6900AF4AC1 /* Utilities.swift */,
 			);
 			path = PlantCare;
 			sourceTree = "<group>";
@@ -130,6 +172,27 @@
 			path = PlantCareUITests;
 			sourceTree = "<group>";
 		};
+		104DE82F251BFA030062FE43 /* Plants */ = {
+			isa = PBXGroup;
+			children = (
+				104DE830251BFA270062FE43 /* Plants.swift */,
+				104DE838251BFB0D0062FE43 /* PlantViewModel.swift */,
+				104DE83D251BFC260062FE43 /* ApiClient.swift */,
+				104DE842251BFC510062FE43 /* PlantDBAPI.swift */,
+			);
+			path = Plants;
+			sourceTree = "<group>";
+		};
+		10B5B8DB251CEF52001F7F39 /* DetailsView */ = {
+			isa = PBXGroup;
+			children = (
+				10E9D0C2251A5D0A00CDBE88 /* PlantDetailView.swift */,
+				10B5B8DC251CEF6A001F7F39 /* PlantInformationCard.swift */,
+				10B5B8E4251D00E1001F7F39 /* PlantDetailBackButton.swift */,
+			);
+			path = DetailsView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -146,6 +209,9 @@
 			dependencies = (
 			);
 			name = PlantCare;
+			packageProductDependencies = (
+				10B5B8D6251CE2F6001F7F39 /* URLImage */,
+			);
 			productName = PlantCare;
 			productReference = 101530142510039900CD0EEA /* PlantCare.app */;
 			productType = "com.apple.product-type.application";
@@ -217,6 +283,9 @@
 				Base,
 			);
 			mainGroup = 1015300B2510039900CD0EEA;
+			packageReferences = (
+				10B5B8D5251CE2F6001F7F39 /* XCRemoteSwiftPackageReference "url-image" */,
+			);
 			productRefGroup = 101530152510039900CD0EEA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -259,7 +328,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1015304325100DED00CD0EEA /* FloatingTabbar.swift in Sources */,
+				10E9D0C8251A5D5F00CDBE88 /* PlantListItemView.swift in Sources */,
+				10C8E9C9251B9F6900AF4AC1 /* Utilities.swift in Sources */,
+				1015304B2511056600CD0EEA /* SummaryView.swift in Sources */,
+				10B5B8DD251CEF6A001F7F39 /* PlantInformationCard.swift in Sources */,
+				10B5B8E5251D00E1001F7F39 /* PlantDetailBackButton.swift in Sources */,
 				1015301A2510039900CD0EEA /* ContentView.swift in Sources */,
+				104DE831251BFA270062FE43 /* Plants.swift in Sources */,
+				10830BBB251B89110029BC4D /* PlantRingView.swift in Sources */,
+				104DE83E251BFC260062FE43 /* ApiClient.swift in Sources */,
+				1015304525102B6B00CD0EEA /* ViewRouter.swift in Sources */,
+				1015304725102F0800CD0EEA /* HomeView.swift in Sources */,
+				10E9D0C3251A5D0A00CDBE88 /* PlantDetailView.swift in Sources */,
+				104DE839251BFB0D0062FE43 /* PlantViewModel.swift in Sources */,
+				101530492511040C00CD0EEA /* Modifiers.swift in Sources */,
+				104DE843251BFC510062FE43 /* PlantDBAPI.swift in Sources */,
 				101530182510039900CD0EEA /* PlantCareApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -580,6 +664,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		10B5B8D5251CE2F6001F7F39 /* XCRemoteSwiftPackageReference "url-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmytro-anokhin/url-image.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.19;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		10B5B8D6251CE2F6001F7F39 /* URLImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10B5B8D5251CE2F6001F7F39 /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1015300C2510039900CD0EEA /* Project object */;
 }

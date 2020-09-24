@@ -7,10 +7,24 @@
 
 import SwiftUI
 
+enum ViewSelected: String {
+    case home
+    case search
+    case profile
+}
+
 struct ContentView: View {
+    @State var viewSelected : ViewSelected = .home;
+
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        ZStack(alignment: .bottom) {
+            GeometryReader { _ in
+                ViewRouter(viewSelected: $viewSelected)
+            }
+            FloatingTabbar(viewSelected: $viewSelected)
+        }
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+        .background(Color("MainBackground").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/))
     }
 }
 
