@@ -9,7 +9,8 @@ import Foundation
 import Combine
 
 class PlantViewModel: ObservableObject {
-    @Published var plants: [Plant] = []
+    private var plantService = PlantService()
+    @Published var plantData: PlantData = PlantData(owner: "", ownerId: "", plants: [Plant]())
     var cancellationToken: AnyCancellable?
     
     init() {
@@ -19,15 +20,15 @@ class PlantViewModel: ObservableObject {
 
 extension PlantViewModel {
     func getPlants() {
-        cancellationToken = PlantDB.request(.userPlants)
+        cancellationToken = plantService.mock_fetchPlants()
             .mapError({ (error) -> Error in
                 print(error)
                 return error
             })
             .sink(
-                receiveCompletion: {_ in},
+                receiveCompletion: { _ in },
                 receiveValue: {
-                    self.plants = $0.plants
+                    self.plantData = $0
                 }
             )
     }

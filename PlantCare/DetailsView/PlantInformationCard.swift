@@ -51,53 +51,57 @@ struct PlantInformationCard: View {
                                 .frame(minWidth: 100)
                         }
                             .frame(maxHeight: 100)
-                        Section {
-                            Text("asdf")
-                            Text("asdf")
-                            Text("asdf")
-                            Text("asdf")
-                            Text("asdf")
-                            Text("asdf")
-                        }
-                        Section {
-                            Text("asdf")
-                            Text("asdf")
-                            Text("asdf")
-                            Text("asdf")
-                            Text("asdf")
-                            Text("asdf")
-                        }
-                        Section {
-                            Text("asdf")
-                            Text("asdf")
-                            Text("asdf")
-                            Text("asdf")
-                            Text("asdf")
-                            Text("asdf")
-                        }
-                        Section {
-                            Text("asdf")
-                            Text("asdf")
-                            Text("asdf")
-                            Text("asdf")
-                            Text("asdf")
-                            Text("asdf")
-                        }
-                        Section {
-                            Text("asdf")
-                            Text("asdf")
-                            Text("asdf")
-                            Text("asdf")
-                            Text("asdf")
-                            Text("asdf")
-                        }
-                        Section {
-                            Text("asdf")
-                            Text("asdf")
-                            Text("asdf")
-                            Text("asdf")
-                            Text("asdf")
-                            Text("asdf")
+                        .padding(.bottom)
+                        Divider()
+                        VStack {
+                            HStack {
+                                Image(systemName: "sun.max")
+                                    .font(.system(size: 24))
+                                    .frame(width: 24)
+                                Text("Sunlight")
+                                    .font(Font.title3.bold())
+                                Spacer()
+                                Text("High")
+                            }
+                            .padding()
+                            Divider()
+                            HStack {
+                                Image(systemName: "drop")
+                                    .font(.system(size: 24))
+                                    .frame(width: 24)
+
+                                Text("Water")
+                                    .font(Font.title3.bold())
+                                Spacer()
+                                Text("250ml")
+                            }
+                            .padding()
+                            Divider()
+                            HStack {
+                                Image(systemName: "thermometer")
+                                    .font(.system(size: 24))
+                                    .frame(width: 24)
+                                    .foregroundColor(Color("GreenDark"))
+
+                                Text("Temperature")
+                                    .font(Font.title3.bold())
+                                Spacer()
+                                Text("16-20°C")
+                            }
+                            .padding()
+                            Divider()
+                            HStack {
+                                Image(systemName: "leaf")
+                                    .font(.system(size: 24))
+                                    .frame(width: 24)
+
+                                Text("Fertilizer")
+                                    .font(Font.title3.bold())
+                                Spacer()
+                                Text("150mg")
+                            }
+                            .padding()
+                            Divider()
                         }
                     }
                         .padding([.trailing, .leading])

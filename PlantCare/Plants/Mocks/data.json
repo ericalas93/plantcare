@@ -1,0 +1,30 @@
+{
+    "owner": "Eric Alas",
+    "ownerId": "alas.eric@gmail.com",
+    "results": [
+        {
+            "id": 1,
+            "name": "Monstera deliciosa",
+            "lastWatered": "2020-09-15T01:01:01",
+            "nextWater": "2020-09-30T01:01:01",
+            "lastMisted": "2020-09-24T01:01:01",
+            "nextMist": "2020-09-26T01:01:01",
+            "lastFertilized": "2020-09-01T01:01:01",
+            "nextFertilize": "2020-10-01T01:01:01",
+            "imageUrl": "https://leafandpaw.com/wp-content/uploads/2019/02/IMG_9723-780x540.jpg",
+            "family": "Arums"
+        },
+        {
+            "id": 2,
+            "name": "ZZ Plant",
+            "lastWatered": "2020-09-20T01:01:01",
+            "nextWater": "2020-09-25T01:01:01",
+            "lastMisted": "2020-09-22T01:01:01",
+            "nextMist": "2020-09-30T01:01:01",
+            "lastFertilized": "2020-09-24T01:01:01",
+            "nextFertilize": "2020-10-24T01:01:01",
+            "imageUrl": "https://img.crocdn.co.uk/images/products2/pl/20/00/03/20/pl2000032091.jpg",
+            "family": "Araceae"
+        }
+    ]
+}

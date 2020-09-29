@@ -7,15 +7,19 @@
 
 import Foundation
 
-struct PlantResponse: Codable {
+struct PlantData: Decodable {
+    let owner: String
+    let ownerId: String
     let plants: [Plant]
     
     enum CodingKeys: String, CodingKey {
         case plants = "results"
+        case owner
+        case ownerId
     }
 }
 
-struct Plant: Codable, Identifiable {
+struct Plant: Decodable, Identifiable {
     var id : Int
     var name: String
     var lastWatered: Date

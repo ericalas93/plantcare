@@ -7,53 +7,56 @@
 
 import SwiftUI
 
-//struct Plant: Identifiable {
-//    var id = UUID()
-//    var name: String
-//    var lastWatered = Calendar.current.date(byAdding: .day, value: -4, to: Date())
-//    var nextWater =  Calendar.current.date(byAdding: .day, value: 1, to: Date())
-//    var lastMisted = Calendar.current.date(byAdding: .day, value: -1, to: Date())
-//    var nextMist = Calendar.current.date(byAdding: .day, value: 2, to: Date())
-//    var lastFertilized = Calendar.current.date(byAdding: .day, value: -5, to: Date())
-//    var nextFertilize = Calendar.current.date(byAdding: .day, value: 15, to: Date())
-//    var imageId = "monstera"
-//    var family : String
-//}
-
 struct HomeView: View {
-//    @State var plants: Array<Plant> = [
-//        Plant(name: "Monstera deliciosa", family: "Plant Family1"),
-//        Plant(name: "Another Plant", family: "Plant Family2"),
-//        Plant(name: "Another Plant2", family: "Plant Family3"),
-//        Plant(name: "One More Plant", family: "Plant Family4"),
-//        Plant(name: "Last Plant", family: "Plant Family5")
-//    ]
     @State var plantSelected: Plant? = nil
     @State var showDetails = false
-    @ObservedObject var viewPlant = PlantViewModel()
+    @ObservedObject var userData = PlantCareViewModel()
 
-    
+    var names = ["Hello", "Eric"]
     var body: some View {
         let localPlantSelected: Plant? = self.plantSelected
 
         VStack {
-            HStack(alignment: .top) {
-                Text("My Home")
+            HStack {
+                Text(userData.currentHouse?.name ?? "My Home")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .foregroundColor(.black)
                 Spacer()
-            }
-                .padding(.top)
-                .padding(.leading)
-                .padding(.bottom)
+                HStack(alignment: .top) {
+                    Menu {
+                        Text("Switch House: ")
+                            .foregroundColor(.red)
+                        Divider()
+                            .frame(minHeight: 20)
+                        ForEach(userData.houses) { house in
+                            HStack {
+                                Button(action: {
+                                    userData.setCurrentHome(ownerId: house.ownerId)
+                                }, label: {
+                                        if house.ownerId == userData.currentHouse?.ownerId {
+                                            Image(systemName: "checkmark")
+                                                .foregroundColor(.black)
+                                        }
+                                        Text(house.name)
+                                    })
+                            }
+                        }
 
-            SummaryView()
+                    } label: {
+                        Image(systemName: "ellipsis.circle")
+                            .font(.system(size: 24))
+                            .foregroundColor(.black)
+                    }
+                }
+            }
+                .padding([.leading, .trailing], 30)
+
+            SummaryView(currentHousePlants: userData.currentHousePlants)
                 .padding(.bottom)
 
             VStack {
                 HStack(alignment: .top) {
-                    Text("My Plants")
+                    Text("Plants")
                         .font(.title2)
                         .foregroundColor(.black)
                     Spacer()
@@ -61,7 +64,7 @@ struct HomeView: View {
                     .padding(.leading, 30)
                 ScrollView(.horizontal) {
                     HStack {
-                        ForEach(viewPlant.plants) { plant in
+                        ForEach(userData.currentHousePlants) { plant in
                             GeometryReader { geometry in
                                 PlantListItemView(plant: plant)
                                     .padding(.leading)
@@ -88,7 +91,7 @@ struct HomeView: View {
             }
             Spacer()
         }
-        .background(Color("MainBackground").ignoresSafeArea(.all))
+            .background(Color("MainBackground").ignoresSafeArea(.all))
     }
 
 }

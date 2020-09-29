@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SummaryView: View {
+    var currentHousePlants: [Plant]
+
     var body: some View {
         VStack {
             HStack(alignment: .top) {
@@ -27,7 +29,7 @@ struct SummaryView: View {
                             Text("Total Plants")
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
-                            Text("42")
+                            Text("\(currentHousePlants.count)")
                                 .font(.headline)
                         }
                     }
@@ -42,7 +44,7 @@ struct SummaryView: View {
                             Text("Overdue")
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
-                            Text("3")
+                            Text("0")
                                 .font(.headline)
                         }
                     }
@@ -74,6 +76,6 @@ struct SummaryView: View {
 
 struct SummaryView_Previews: PreviewProvider {
     static var previews: some View {
-        SummaryView()
+        SummaryView(currentHousePlants: [Plant]())
     }
 }
