@@ -16,7 +16,12 @@
                     "lastFertilized": "2020-09-01T01:01:01",
                     "nextFertilize": "2020-10-01T01:01:01",
                     "imageUrl": "https://leafandpaw.com/wp-content/uploads/2019/02/IMG_9723-780x540.jpg",
-                    "family": "Arums"
+                    "family": "Arums",
+                    "waterAmount": "20mL",
+                    "sunAmount": "High",
+                    "temperature": "15-20°C",
+                    "fertilizerAmount": "20g",
+                    "notes": ""
                 },
                 {
                     "id": 2,
@@ -28,7 +33,12 @@
                     "lastFertilized": "2020-09-24T01:01:01",
                     "nextFertilize": "2020-10-24T01:01:01",
                     "imageUrl": "https://img.crocdn.co.uk/images/products2/pl/20/00/03/20/pl2000032091.jpg",
-                    "family": "Araceae"
+                    "family": "Araceae",
+                    "waterAmount": "20mL",
+                    "sunAmount": "High",
+                    "temperature": "15-20°C",
+                    "fertilizerAmount": "20g",
+                    "notes": "Water every 3-4 weeks, allowing soil to dry out between waterings. Increase frequency with increased light."
                 }
             ]
         },
@@ -47,11 +57,16 @@
                     "lastFertilized": "2020-09-01T01:01:01",
                     "nextFertilize": "2020-10-01T01:01:01",
                     "imageUrl": "https://leafandpaw.com/wp-content/uploads/2019/02/IMG_9723-780x540.jpg",
-                    "family": "Arums"
+                    "family": "Arums",
+                    "waterAmount": "20mL",
+                    "sunAmount": "High",
+                    "temperature": "15-20°C",
+                    "fertilizerAmount": "20g",
+                    "notes": ""
                 },
                 {
                     "id": 2,
-                    "name": "ZZ Plant",
+                    "name": "1ZZ Plant",
                     "lastWatered": "2020-09-20T01:01:01",
                     "nextWater": "2020-09-25T01:01:01",
                     "lastMisted": "2020-09-22T01:01:01",
@@ -59,7 +74,12 @@
                     "lastFertilized": "2020-09-24T01:01:01",
                     "nextFertilize": "2020-10-24T01:01:01",
                     "imageUrl": "https://img.crocdn.co.uk/images/products2/pl/20/00/03/20/pl2000032091.jpg",
-                    "family": "Araceae"
+                    "family": "Araceae",
+                    "waterAmount": "20mL",
+                    "sunAmount": "High",
+                    "temperature": "15-20°C",
+                    "fertilizerAmount": "20g",
+                    "notes": "Water every 3-4 weeks, allowing soil to dry out between waterings. Increase frequency with increased light."
                 }
             ]
         }

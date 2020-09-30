@@ -9,20 +9,20 @@ import Foundation
 
 struct UserData: Decodable {
     let userId: String
-    let houses: [House]
-    var currentHome: House?
+    var houses: [House]
+    var currentHomeId: Int?
     
     enum CodingKeys: String, CodingKey {
         case userId
         case houses
-        case currentHome
+        case currentHomeId
     }
 }
 
 struct House: Decodable, Identifiable {
     let id: Int
     let ownerId: String
-    let name: String
+    var name: String
     var plants: [Plant]
     
     enum CodingKeys: String, CodingKey {

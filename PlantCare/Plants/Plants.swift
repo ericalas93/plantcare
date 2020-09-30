@@ -30,4 +30,9 @@ struct Plant: Decodable, Identifiable {
     var nextFertilize : Date
     var imageUrl : String
     var family : String
+    var waterAmount: String
+    var sunAmount: String
+    var temperature: String
+    var fertilizerAmount: String
+    var notes: String
 }

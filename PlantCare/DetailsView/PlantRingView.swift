@@ -26,10 +26,10 @@ struct Arc: Shape {
 
 func getDegree(last: Date, next: Date) -> Double {
     let today = Date()
-    let totalDistance =  DateInterval(start: last, end: next).duration
-    let tillTodayDistance =  DateInterval(start: last, end: today).duration
+    let totalDistance = DateInterval(start: last, end: next).duration
+    let tillTodayDistance = DateInterval(start: last, end: today).duration
 
-    if totalDistance == 0 {
+    if totalDistance == 0 || tillTodayDistance == 0 {
         return 0
     }
     let percent = tillTodayDistance / totalDistance
@@ -43,7 +43,7 @@ func getCircleColours(degree: Double) -> (foregroundColor: Color, backgroundColo
     if Int(degree) < 270 {
         return (foregroundColor: Color("GreenDark"), backgroundColor: Color("GreenLight"))
     }
-    
+
     return (foregroundColor: Color("PinkDark"), backgroundColor: Color("PinkLight"))
 }
 
@@ -51,15 +51,16 @@ func getLabel(next: Date, degree: Double) -> String {
     if Int(degree) < 270 {
         return "on: \(getDateString(date: next))"
     }
-    
+
     return "Needed"
 }
 
 struct PlantRingView: View {
-    var last : Date
-    var next : Date
-    var title : String
-    var Icon : Image
+    var last: Date
+    var next: Date
+    var title: String
+    var Icon: Image
+    var onUpdate: () -> Void
 
     var body: some View {
         let degree = getDegree(last: last, next: next)
@@ -81,8 +82,17 @@ struct PlantRingView: View {
                     .foregroundColor(foregroundColor)
                     .font(.system(size: 20))
             }
-            .frame(width: 50, height: 50, alignment: .center)
-
+                .frame(width: 50, height: 50, alignment: .center)
+                .padding(.bottom, 5)
+            Button("Update") {
+                onUpdate()
+            }
+                .padding(10)
+                .foregroundColor(foregroundColor)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 6)
+                        .stroke(backgroundColor, lineWidth: 1)
+                )
         }
     }
 }
@@ -90,8 +100,8 @@ struct PlantRingView: View {
 struct PlantRingView_Previews: PreviewProvider {
     static var previews: some View {
         let last = Calendar.current.date(byAdding: .day, value: -5, to: Date())
-        let next =  Calendar.current.date(byAdding: .day, value: 10, to: Date())
+        let next = Calendar.current.date(byAdding: .day, value: 10, to: Date())
         let icon = Image(systemName: "drop")
-        PlantRingView(last: last!, next: next!, title: "Water", Icon: icon)
+        PlantRingView(last: last!, next: next!, title: "Water", Icon: icon, onUpdate: {})
     }
 }

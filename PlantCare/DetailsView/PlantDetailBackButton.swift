@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct PlantDetailBackButton: View {
-    @Environment(\.presentationMode) var showingDetails
+//    @Environment(\.presentationMode) var showingDetails
 
+    var close: () -> Void
     var body: some View {
         VStack {
             HStack {
                 Button(action: {
-                    self.showingDetails.wrappedValue.dismiss()
-                    
+//                    self.showingDetails.wrappedValue.dismiss()
+                    close()
                 }) {
                     Image(systemName: "arrow.left")
                         .font(.system(size: 25))
@@ -33,6 +34,6 @@ struct PlantDetailBackButton: View {
 
 struct PlantDetailBackButton_Previews: PreviewProvider {
     static var previews: some View {
-        PlantDetailBackButton()
+        PlantDetailBackButton(close: {})
     }
 }

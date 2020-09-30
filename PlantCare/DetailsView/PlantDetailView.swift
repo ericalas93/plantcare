@@ -11,6 +11,8 @@ import URLImage
 struct PlantDetailView: View {
     @State var fullImage = false
     @Environment(\.presentationMode) var showingDetails
+    @ObservedObject var viewModel: PlantCareViewModel
+    var close: () -> Void
 
     var plant: Plant
     var body: some View {
@@ -30,8 +32,8 @@ struct PlantDetailView: View {
                             }
                             Spacer()
                         }
-                        .background(Color.black)
-                        .ignoresSafeArea(.all)
+                            .background(Color.black)
+                            .ignoresSafeArea(.all)
                     }
                 }
             )
@@ -52,10 +54,9 @@ struct PlantDetailView: View {
                         }
                     }
                 )
-                PlantDetailBackButton()
-                PlantInformationCard(plant: plant)
+                PlantDetailBackButton(close: close)
+                PlantInformationCard(plant: plant, viewModel: viewModel)
             }
-                .ignoresSafeArea(.all)
         }
     }
 }
@@ -63,6 +64,6 @@ struct PlantDetailView: View {
 struct PlantDetailView_Previews: PreviewProvider {
     static var previews: some View {
 //        PlantDetailView(plant: Plant(id: 1, name: "Eric", lastWatered: Date(), nextWater: Date(), lastMisted: Date(), nextMist: Date(), lastFertilized: Date(), nextFertilize: Date(), imageUrl: "https://img.crocdn.co.uk/images/products2/pl/20/00/03/20/pl2000032091.jpg", family: "Fam"))
-        PlantDetailView(plant: Plant(id: 1, name: "Eric", lastWatered: Date(), nextWater: Date(), lastMisted: Date(), nextMist: Date(), lastFertilized: Date(), nextFertilize: Date(), imageUrl: "https://leafandpaw.com/wp-content/uploads/2019/02/IMG_9723-780x540.jpg", family: "Fam"))
+        PlantDetailView(viewModel: PlantCareViewModel(), close: { }, plant: Plant(id: 1, name: "Eric", lastWatered: Date(), nextWater: Date(), lastMisted: Date(), nextMist: Date(), lastFertilized: Date(), nextFertilize: Date(), imageUrl: "https://img.crocdn.co.uk/images/products2/pl/20/00/03/20/pl2000032091.jpg", family: "Fam", waterAmount: "200ml", sunAmount: "High", temperature: "16-20°C", fertilizerAmount: "150g", notes: ""))
     }
 }

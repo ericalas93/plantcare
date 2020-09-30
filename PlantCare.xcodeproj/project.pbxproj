@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10076192252401D400341E01 /* EditPlantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10076191252401D400341E01 /* EditPlantView.swift */; };
+		10076197252402FD00341E01 /* EditPlantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10076196252402FD00341E01 /* EditPlantViewModel.swift */; };
 		10093AD7251F94F800087D15 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 10093AD6251F94F800087D15 /* data.json */; };
 		10093AE2251F96D100087D15 /* JSONReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10093AE1251F96D100087D15 /* JSONReader.swift */; };
 		101530182510039900CD0EEA /* PlantCareApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101530172510039900CD0EEA /* PlantCareApp.swift */; };
@@ -53,6 +55,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		10076191252401D400341E01 /* EditPlantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantView.swift; sourceTree = "<group>"; };
+		10076196252402FD00341E01 /* EditPlantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantViewModel.swift; sourceTree = "<group>"; };
 		10093AD6251F94F800087D15 /* data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		10093AE1251F96D100087D15 /* JSONReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONReader.swift; sourceTree = "<group>"; };
 		101530142510039900CD0EEA /* PlantCare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlantCare.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,7 +163,6 @@
 				1015304A2511056600CD0EEA /* SummaryView.swift */,
 				10B5B8DB251CEF52001F7F39 /* DetailsView */,
 				10E9D0C7251A5D5F00CDBE88 /* PlantListItemView.swift */,
-				10830BBA251B89110029BC4D /* PlantRingView.swift */,
 				10C8E9C8251B9F6900AF4AC1 /* Utilities.swift */,
 			);
 			path = PlantCare;
@@ -199,6 +202,7 @@
 				104DE838251BFB0D0062FE43 /* PlantViewModel.swift */,
 				1049CB1E2520CBED0055E183 /* PlantService.swift */,
 				10A800F525226529000D7780 /* House.swift */,
+				10076196252402FD00341E01 /* EditPlantViewModel.swift */,
 			);
 			path = Plants;
 			sourceTree = "<group>";
@@ -214,9 +218,11 @@
 		10B5B8DB251CEF52001F7F39 /* DetailsView */ = {
 			isa = PBXGroup;
 			children = (
+				10830BBA251B89110029BC4D /* PlantRingView.swift */,
 				10E9D0C2251A5D0A00CDBE88 /* PlantDetailView.swift */,
 				10B5B8DC251CEF6A001F7F39 /* PlantInformationCard.swift */,
 				10B5B8E4251D00E1001F7F39 /* PlantDetailBackButton.swift */,
+				10076191252401D400341E01 /* EditPlantView.swift */,
 			);
 			path = DetailsView;
 			sourceTree = "<group>";
@@ -374,8 +380,10 @@
 				1015304725102F0800CD0EEA /* HomeView.swift in Sources */,
 				10E9D0C3251A5D0A00CDBE88 /* PlantDetailView.swift in Sources */,
 				104DE839251BFB0D0062FE43 /* PlantViewModel.swift in Sources */,
+				10076197252402FD00341E01 /* EditPlantViewModel.swift in Sources */,
 				101530492511040C00CD0EEA /* Modifiers.swift in Sources */,
 				101530182510039900CD0EEA /* PlantCareApp.swift in Sources */,
+				10076192252401D400341E01 /* EditPlantView.swift in Sources */,
 				10A80104252268B1000D7780 /* PlantCareViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
