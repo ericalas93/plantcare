@@ -12,6 +12,8 @@ struct PlantDetailView: View {
     @State var fullImage = false
     @Environment(\.presentationMode) var showingDetails
     @ObservedObject var viewModel: PlantCareViewModel
+    @ObservedObject var editPlantModel: EditPlantViewModel
+
     var close: () -> Void
 
     var plant: Plant
@@ -55,7 +57,7 @@ struct PlantDetailView: View {
                     }
                 )
                 PlantDetailBackButton(close: close)
-                PlantInformationCard(plant: plant, viewModel: viewModel)
+                PlantInformationCard(plant: plant, viewModel: viewModel, editPlantModel: editPlantModel)
             }
         }
     }
@@ -63,7 +65,6 @@ struct PlantDetailView: View {
 
 struct PlantDetailView_Previews: PreviewProvider {
     static var previews: some View {
-//        PlantDetailView(plant: Plant(id: 1, name: "Eric", lastWatered: Date(), nextWater: Date(), lastMisted: Date(), nextMist: Date(), lastFertilized: Date(), nextFertilize: Date(), imageUrl: "https://img.crocdn.co.uk/images/products2/pl/20/00/03/20/pl2000032091.jpg", family: "Fam"))
-        PlantDetailView(viewModel: PlantCareViewModel(), close: { }, plant: Plant(id: 1, name: "Eric", lastWatered: Date(), nextWater: Date(), lastMisted: Date(), nextMist: Date(), lastFertilized: Date(), nextFertilize: Date(), imageUrl: "https://img.crocdn.co.uk/images/products2/pl/20/00/03/20/pl2000032091.jpg", family: "Fam", waterAmount: "200ml", sunAmount: "High", temperature: "16-20°C", fertilizerAmount: "150g", notes: ""))
+        PlantDetailView(viewModel: PlantCareViewModel(), editPlantModel: EditPlantViewModel(nil), close: { }, plant: mockPlantNoNotes)
     }
 }

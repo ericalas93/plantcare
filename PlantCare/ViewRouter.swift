@@ -9,9 +9,13 @@ import SwiftUI
 
 struct ViewRouter: View {
     @Binding var viewSelected: ViewSelected
+    @Binding var inEditMode: Bool
+    @ObservedObject var userData: PlantCareViewModel
+    @ObservedObject var editPlant: EditPlantViewModel
+    
     var body: some View {
         if viewSelected == .home {
-            HomeView()
+            HomeView(inEditMode: $inEditMode, userData: userData, editPlant: editPlant)
         }
         if viewSelected == .search {
             Text("search")

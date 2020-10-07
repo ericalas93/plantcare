@@ -15,16 +15,20 @@ enum ViewSelected: String {
 
 struct ContentView: View {
     @State var viewSelected : ViewSelected = .home;
-
+    // hide floating tab bar
+    @State var inEditMode = false
+    @ObservedObject var userData = PlantCareViewModel()
+    @ObservedObject var editPlant = EditPlantViewModel(nil)
+    
     var body: some View {
         ZStack(alignment: .bottom) {
             GeometryReader { _ in
-                ViewRouter(viewSelected: $viewSelected)
+                ViewRouter(viewSelected: $viewSelected, inEditMode: $inEditMode, userData: userData, editPlant: editPlant)
             }
-            FloatingTabbar(viewSelected: $viewSelected)
+            FloatingTabbar(viewSelected: $viewSelected, inEditMode: $inEditMode)
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-        .background(Color("MainBackground").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/))
+        .background(Color("MainBackground").edgesIgnoringSafeArea(.all))
     }
 }
 

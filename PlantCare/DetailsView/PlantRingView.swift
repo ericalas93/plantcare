@@ -57,12 +57,13 @@ func getLabel(next: Date, degree: Double) -> String {
 
 struct PlantRingView: View {
     var last: Date
-    var next: Date
+    var frequency: Int
     var title: String
     var Icon: Image
     var onUpdate: () -> Void
 
     var body: some View {
+        let next = Calendar.current.date(byAdding: .day, value: frequency, to: last)!
         let degree = getDegree(last: last, next: next)
         let (foregroundColor, backgroundColor) = getCircleColours(degree: degree)
         let label = getLabel(next: next, degree: degree)
@@ -100,8 +101,7 @@ struct PlantRingView: View {
 struct PlantRingView_Previews: PreviewProvider {
     static var previews: some View {
         let last = Calendar.current.date(byAdding: .day, value: -5, to: Date())
-        let next = Calendar.current.date(byAdding: .day, value: 10, to: Date())
         let icon = Image(systemName: "drop")
-        PlantRingView(last: last!, next: next!, title: "Water", Icon: icon, onUpdate: {})
+        PlantRingView(last: last!, frequency: 10, title: "Water", Icon: icon, onUpdate: {})
     }
 }

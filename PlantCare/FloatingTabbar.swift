@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FloatingTabbar: View {
     @Binding var viewSelected : ViewSelected
+    @Binding var inEditMode: Bool
     @State var navExpanded = false
 
     var body: some View {
@@ -68,6 +69,7 @@ struct FloatingTabbar: View {
                 self.navExpanded.toggle()
             }
             .animation(.interactiveSpring(response: 0.6, dampingFraction: 0.7, blendDuration: 0.6))
+            .opacity(inEditMode ? 0 : 1)
         }
     }
 }

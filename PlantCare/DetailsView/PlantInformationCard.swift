@@ -9,8 +9,10 @@ import SwiftUI
 
 struct PlantInformationCard: View {
     @State var expanded = false
+    @State var inEditMode = false
     var plant: Plant
     @ObservedObject var viewModel: PlantCareViewModel
+    @ObservedObject var editPlantModel: EditPlantViewModel
 
     var body: some View {
         VStack {
@@ -18,7 +20,7 @@ struct PlantInformationCard: View {
                 Image(systemName: expanded ? "chevron.compact.down" : "chevron.compact.up")
                     .font(.system(size: 35))
                     .opacity(0.1)
-                    .onTapGesture(count: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/) {
+                    .onTapGesture(count: 1) {
                         self.expanded.toggle()
                 }
 
@@ -40,7 +42,9 @@ struct PlantInformationCard: View {
                                     .foregroundColor(Color.secondary)
                             }
                             Spacer()
-                            NavigationLink(destination: EditPlantView(plant: EditPlantViewModel(plant))) {
+                            NavigationLink(destination: EditPlantView(plant: editPlantModel, viewModel: viewModel, inEditMode: $inEditMode)
+                                    .navigationTitle("")
+                                    .navigationBarHidden(true)) {
                                 Image(systemName: "pencil.circle")
                                     .resizable()
                                     .frame(width: 30, height: 30)
@@ -48,19 +52,19 @@ struct PlantInformationCard: View {
                             }
                         }
                         HStack {
-                            PlantRingView(last: plant.lastWatered, next: plant.nextWater, title: "Water", Icon: Image(systemName: "drop"), onUpdate: {
+                            PlantRingView(last: plant.lastWatered, frequency: plant.waterFrequency, title: "Water", Icon: Image(systemName: "drop"), onUpdate: {
                                     viewModel.waterPlant(plantId: plant.id)
                                 })
                                 .frame(minWidth: 100)
                             Spacer()
                             Divider()
                             Spacer()
-                            PlantRingView(last: plant.lastMisted, next: plant.nextMist, title: "Mist", Icon: Image(systemName: "cloud.rain"), onUpdate: { })
+                            PlantRingView(last: plant.lastMisted, frequency: plant.mistFrequency, title: "Mist", Icon: Image(systemName: "cloud.rain"), onUpdate: { })
                                 .frame(minWidth: 100)
                             Spacer()
                             Divider()
                             Spacer()
-                            PlantRingView(last: plant.lastFertilized, next: plant.nextFertilize, title: "Fertilize", Icon: Image(systemName: "leaf"), onUpdate: { })
+                            PlantRingView(last: plant.lastFertilized, frequency: plant.fertilizeFrequency, title: "Fertilize", Icon: Image(systemName: "leaf"), onUpdate: { })
                                 .frame(minWidth: 100)
                         }
                             .frame(maxHeight: 5150)
@@ -164,6 +168,6 @@ struct PlantInformationCard: View {
 
 struct PlantInformationCard_Previews: PreviewProvider {
     static var previews: some View {
-        PlantInformationCard(plant: Plant(id: 1, name: "Eric", lastWatered: Date(), nextWater: Date(), lastMisted: Date(), nextMist: Date(), lastFertilized: Date(), nextFertilize: Date(), imageUrl: "https://img.crocdn.co.uk/images/products2/pl/20/00/03/20/pl2000032091.jpg", family: "Fam", waterAmount: "200ml", sunAmount: "High", temperature: "16-20°C", fertilizerAmount: "150g", notes: ""), viewModel: PlantCareViewModel())
+        PlantInformationCard(plant: mockPlantNoNotes, viewModel: PlantCareViewModel(), editPlantModel: EditPlantViewModel(nil))
     }
 }
