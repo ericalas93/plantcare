@@ -9,6 +9,7 @@ target 'PlantCare' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
+  pod 'FirebaseFirestoreSwift'
 
   target 'PlantCareTests' do
     inherit! :search_paths

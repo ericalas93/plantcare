@@ -8,17 +8,24 @@
 import Foundation
 import Combine
 import FirebaseStorage
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 class PlantCareViewModel: ObservableObject {
     private var plantService = PlantService()
     private var STORAGE_URL = "gs://storagetrial-467d3.appspot.com";
     @Published var userData: UserData = UserData(userId: "", houses: [House](), currentHomeId: nil)
     @Published var busy = (isBusy: false, text: "")
-  
+    
+    var db: Firestore?
     var cancellationToken: AnyCancellable?
     
     init() {
-        getUserData()
+        if(!isPreview()) {
+            db = Firestore.firestore()
+        }
+
+        loadData()
     }
 
     // MARK: setters
@@ -30,9 +37,17 @@ class PlantCareViewModel: ObservableObject {
     }
     
     func insertPlant(_ plant: Plant, _ isNewPlant: Bool) {
+        if (isPreview()) {
+            mock_insertPlant(plant, isNewPlant)
+            return
+        }
+
         let currentHouseIdx = getCurrentHouseIdx()
         if (isNewPlant) {
-            userData.houses[currentHouseIdx].plants.append(plant);
+            let doc = db!.collection("houses").document("lE7gZPFmjY8rfBSNHHKo")
+            doc.updateData([
+                "plants": FieldValue.arrayUnion([plant.firestore])
+            ])
             self.busy = (isBusy: false, text: "")
             return;
         }
@@ -132,7 +147,52 @@ class PlantCareViewModel: ObservableObject {
 }
 
 extension PlantCareViewModel {
-    func getUserData() {
+    func loadData() {
+        if (isPreview()) {
+            mock_fetchUserData()
+        } else {
+            fetchUserData()
+        }
+    }
+
+    func fetchUserData() {
+        var decoder: JSONDecoder {
+            let _decoder = JSONDecoder()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+            _decoder.dateDecodingStrategy = .formatted(dateFormatter)
+            return _decoder
+        }
+      
+        
+        db!.collection("houses").document("lE7gZPFmjY8rfBSNHHKo")
+            .addSnapshotListener { documentSnapshot, error in
+                guard let document = documentSnapshot else {
+                    print("Error fetching document: \(error!)")
+                    return
+                }
+                guard let data = document.data() else {
+                    print("Document data was empty.")
+                    return
+                }
+                
+                do {
+                    let _data = try JSONSerialization.data(withJSONObject: data)
+                    let house = try decoder.decode(House.self, from: _data)
+                    
+                    self.userData = UserData(userId: "lE7gZPFmjY8rfBSNHHKo", houses: [house], currentHomeId: house.id)
+
+                    print("Current data: \(house)")
+                } catch _ {
+                    print("error fetching user data")
+                }
+        }
+    }
+}
+
+// MARK: Mocks
+extension PlantCareViewModel {
+    func mock_fetchUserData() {
         cancellationToken = plantService.mock_fetchUserData()
             .mapError({ (error) -> Error in
                 print(error)
@@ -149,4 +209,18 @@ extension PlantCareViewModel {
                 }
             )
     }
+    
+    func mock_insertPlant(_ plant: Plant, _ isNewPlant: Bool) {
+        let currentHouseIdx = getCurrentHouseIdx()
+        if (isNewPlant) {
+            userData.houses[currentHouseIdx].plants.append(plant);
+            self.busy = (isBusy: false, text: "")
+            return;
+        }
+        
+        let (_, plantIdx) = getPlantToUpdate(plantId: plant.id)
+        userData.houses[currentHouseIdx].plants[plantIdx] = plant
+        self.busy = (isBusy: false, text: "")
+    }
 }
+

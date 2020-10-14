@@ -11,10 +11,9 @@ import Firebase
 @main
 struct PlantCareApp: App {
     init() {
-        #if targetEnvironment(simulator)
-        #else
+        if (!isPreview()) {
             FirebaseApp.configure()
-        #endif
+        }
     }
 
     var body: some Scene {
@@ -22,4 +21,8 @@ struct PlantCareApp: App {
             ContentView()
         }
     }
+}
+
+func isPreview() -> Bool {
+    return ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1";
 }

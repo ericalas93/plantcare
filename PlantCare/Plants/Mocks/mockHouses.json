@@ -2,7 +2,7 @@
     "userId": "alas.eric@gmail.com",
     "houses": [
         {
-            "id": 1,
+            "id": "1",
             "ownerId": "alas.eric@gmail.com",
             "name": "Eric's Home",
             "plants": [
@@ -43,7 +43,7 @@
             ]
         },
         {
-            "id": 2,
+            "id": "2",
             "ownerId": "alyssa.morris93@gmail.com",
             "name": "Alyssa's Home",
             "plants": [

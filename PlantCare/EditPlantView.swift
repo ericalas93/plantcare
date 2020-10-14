@@ -146,6 +146,7 @@ struct EditPlantView: View {
                         Button("Save") {
                             let (plant, isNewPlant) = self.plant.save(existingPlants: viewModel.currentHousePlants)
                             viewModel.savePlant(plant, isNewPlant, self.inputImage)
+                            self.plant.resetForm()
                             self.presentationMode.wrappedValue.dismiss()
 
                         }.disabled(plant.preventSave)
