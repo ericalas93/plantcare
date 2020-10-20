@@ -145,13 +145,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		1001E365252547A800538CAD /* Home */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
 		1007619B2524D1F900341E01 /* DismissGuardian */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,7 +206,6 @@
 				10E9D0C7251A5D5F00CDBE88 /* PlantListItemView.swift */,
 				10C8E9C8251B9F6900AF4AC1 /* Utilities.swift */,
 				10076191252401D400341E01 /* EditPlantView.swift */,
-				1001E365252547A800538CAD /* Home */,
 				1050CB6725374B6B00E61C3D /* AppDelegate+Injection.swift */,
 			);
 			path = PlantCare;
