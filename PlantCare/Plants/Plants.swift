@@ -21,7 +21,7 @@ struct PlantData: Decodable {
 }
 
 struct Plant: Decodable, Identifiable {
-    var id: Int
+    var id: String
     var name: String
     var lastWatered: Date
     var waterFrequency: Int
@@ -36,6 +36,7 @@ struct Plant: Decodable, Identifiable {
     var temperature: String
     var fertilizerAmount: String
     var notes: String
+    var ownerId: String
 
     var dictionary: [String: Any] {
         let formatter = DateFormatter()
@@ -56,11 +57,8 @@ struct Plant: Decodable, Identifiable {
             "sunAmount": sunAmount,
             "temperature": temperature,
             "fertilizerAmount": fertilizerAmount,
-            "notes": notes
+            "notes": notes,
+            "ownerId": ownerId
         ]
-    }
-
-    var firestore: NSDictionary {
-        return dictionary as NSDictionary
     }
 }

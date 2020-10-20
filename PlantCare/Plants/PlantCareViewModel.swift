@@ -10,22 +10,42 @@ import Combine
 import FirebaseStorage
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import Resolver
 
 class PlantCareViewModel: ObservableObject {
-    private var plantService = PlantService()
+    @Injected var authenticationService: AuthenticationService
+
     private var STORAGE_URL = "gs://storagetrial-467d3.appspot.com";
-    @Published var userData: UserData = UserData(userId: "", houses: [House](), currentHomeId: nil)
+    @Published var userData: UserData = UserData(houses: [House](), currentHomeId: nil)
     @Published var busy = (isBusy: false, text: "")
-    
+    var userId: String = "unknown" {
+        didSet {
+            self.loadData()
+        }
+    }
+
     var db: Firestore?
+    private var cancellables = Set<AnyCancellable>()
     var cancellationToken: AnyCancellable?
-    
+
+    var decoder: JSONDecoder {
+        let _decoder = JSONDecoder()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        _decoder.dateDecodingStrategy = .formatted(dateFormatter)
+        return _decoder
+    }
+
     init() {
         if(!isPreview()) {
             db = Firestore.firestore()
+            authenticationService.$user
+                .compactMap { user in
+                    user?.uid
+                }
+                .assign(to: \.userId, on: self)
+                .store(in: &cancellables)
         }
-
-        loadData()
     }
 
     // MARK: setters
@@ -35,93 +55,6 @@ class PlantCareViewModel: ObservableObject {
         }
         userData.currentHomeId = newCurrentHome!.id
     }
-    
-    func insertPlant(_ plant: Plant, _ isNewPlant: Bool) {
-        if (isPreview()) {
-            mock_insertPlant(plant, isNewPlant)
-            return
-        }
-
-        let currentHouseIdx = getCurrentHouseIdx()
-        if (isNewPlant) {
-            let doc = db!.collection("houses").document("lE7gZPFmjY8rfBSNHHKo")
-            doc.updateData([
-                "plants": FieldValue.arrayUnion([plant.firestore])
-            ])
-            self.busy = (isBusy: false, text: "")
-            return;
-        }
-        
-        let (_, plantIdx) = getPlantToUpdate(plantId: plant.id)
-        userData.houses[currentHouseIdx].plants[plantIdx] = plant
-        self.busy = (isBusy: false, text: "")
-    }
-    
-    func savePlant(_ plant: Plant, _ isNewPlant: Bool, _ image: UIImage?) {
-        if (image != nil) {
-            // update image
-            uploadImage(image!, plant, isNewPlant)
-        } else {
-            // user didnt change picture
-            self.insertPlant(plant, isNewPlant)
-        }
-    }
-    
-    func uploadImage(_ image: UIImage, _ plant: Plant, _ isNewPlant: Bool) {
-        // TODO: if image is new but on existing plant, add placeholder image (or from library eventually)
-        self.busy = (isBusy: true, text: "Saving Plant")
-        if let imageData = image.jpegData(compressionQuality: 1) {
-            let storage = Storage.storage()
-            let imageName = UUID().uuidString + ".jpg"
-            let imageRef = storage.reference().child(imageName);
-            
-            imageRef.putData(imageData, metadata: nil) { (data, err) in
-                if let err = err {
-                    print("an error has occured - \(err.localizedDescription)")
-                    // TODO error handling
-                    return
-                }
-                
-                imageRef.downloadURL { (url, error) in
-                    guard let imageUrl = url else {
-                        // TODO error handling
-                        return
-                    }
-                    let plantWithUrl = Plant(id: plant.id, name: plant.name, lastWatered: plant.lastWatered, waterFrequency: plant.waterFrequency, lastMisted: plant.lastMisted, mistFrequency: plant.mistFrequency, lastFertilized: plant.lastFertilized, fertilizeFrequency: plant.fertilizeFrequency, imageUrl: imageUrl.absoluteString, family: plant.family, waterAmount: plant.waterAmount, sunAmount: plant.sunAmount, temperature: plant.temperature, fertilizerAmount: plant.fertilizerAmount, notes: plant.notes)
-                    self.insertPlant(plantWithUrl, isNewPlant)
-                }
-            }
-        } else {
-            print("couldnt compress")
-        }
-    }
-    
-    // MARK: getters
-    func getCurrentHouseIdx() -> Int {
-        let houseIdx = userData.houses.firstIndex { house in
-            return house.id == userData.currentHomeId
-        }
-        
-        return houseIdx!
-    }
-
-    func getPlantToUpdate(plantId: Int) -> (houseIdx: Int, plantIdx: Int) {
-        let houseIdx = getCurrentHouseIdx()
-
-        let plantIdx = userData.houses[houseIdx].plants.firstIndex { plant in
-            return plant.id == plantId
-        }
-        
-        return (houseIdx: houseIdx, plantIdx: plantIdx!)
-
-    }
-    
-    // MARK: updaters
-    func waterPlant(plantId: Int) {
-        let (houseIdx, plantIdx) = getPlantToUpdate(plantId: plantId)
-
-        userData.houses[houseIdx].plants[plantIdx].lastWatered = Date()
-    }
 
     // MARK: selectors
     var currentHousePlants: [Plant] {
@@ -129,13 +62,15 @@ class PlantCareViewModel: ObservableObject {
             return [];
         }
 
-        return currentHouse!.plants
+        return self.userData.plants.filter { plant in
+            return plant.ownerId == self.userData.currentHomeId
+        }
     }
-    
+
     var houses: [House] {
         return userData.houses
     }
-    
+
     var currentHouse: House? {
         if (userData.currentHomeId == nil) {
             return nil
@@ -148,24 +83,11 @@ class PlantCareViewModel: ObservableObject {
 
 extension PlantCareViewModel {
     func loadData() {
-        if (isPreview()) {
-            mock_fetchUserData()
-        } else {
-            fetchUserData()
-        }
+        fetchUserData()
     }
 
     func fetchUserData() {
-        var decoder: JSONDecoder {
-            let _decoder = JSONDecoder()
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-            _decoder.dateDecodingStrategy = .formatted(dateFormatter)
-            return _decoder
-        }
-      
-        
-        db!.collection("houses").document("lE7gZPFmjY8rfBSNHHKo")
+        db!.collection("houses").document(self.userId)
             .addSnapshotListener { documentSnapshot, error in
                 guard let document = documentSnapshot else {
                     print("Error fetching document: \(error!)")
@@ -175,52 +97,129 @@ extension PlantCareViewModel {
                     print("Document data was empty.")
                     return
                 }
-                
+
                 do {
                     let _data = try JSONSerialization.data(withJSONObject: data)
-                    let house = try decoder.decode(House.self, from: _data)
-                    
-                    self.userData = UserData(userId: "lE7gZPFmjY8rfBSNHHKo", houses: [house], currentHomeId: house.id)
+                    let house = try self.decoder.decode(House.self, from: _data)
 
-                    print("Current data: \(house)")
+                    self.userData = UserData(houses: [house], currentHomeId: house.id)
+                    self.fetchPlants(for: self.userId)
+                    self.fetchSharedHouses(to: self.userId)
                 } catch _ {
                     print("error fetching user data")
                 }
         }
     }
-}
 
-// MARK: Mocks
-extension PlantCareViewModel {
-    func mock_fetchUserData() {
-        cancellationToken = plantService.mock_fetchUserData()
-            .mapError({ (error) -> Error in
-                print(error)
-                return error
-            })
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { data in
-                    let currentHome = data.houses.first { house in
-                        return house.ownerId == data.userId
+    func fetchSharedHouses(to currentUser: String) {
+        db!.collection("houses").whereField("sharedWith", arrayContainsAny: [currentUser])
+            .addSnapshotListener { querySnapshot, error in
+
+                if let querySnapshot = querySnapshot {
+                    let houses = querySnapshot.documents.compactMap { document -> House? in
+                        do {
+                            let _data = try JSONSerialization.data(withJSONObject: document.data())
+                            let house = try self.decoder.decode(House.self, from: _data)
+
+                            // fetch this persons plants
+                            self.fetchPlants(for: house.ownerId)
+                            return house
+                        } catch _ {
+                            print("error fetching shared houses")
+                            return nil
+                        }
+
                     }
 
-                    self.userData = UserData(userId: data.userId, houses: data.houses, currentHomeId: currentHome!.id)
+                    self.userData.houses.append(contentsOf: houses)
                 }
-            )
+        }
+    }
+
+    func fetchPlants(for userId: String) {
+        db!.collection("plants").whereField("ownerId", isEqualTo: userId)
+            .addSnapshotListener { querySnapshot, error in
+                if let querySnapshot = querySnapshot {
+                    print("fetching plants")
+                    querySnapshot.documents.forEach { document in
+                        do {
+                            let _data = try JSONSerialization.data(withJSONObject: document.data())
+                            let plant = try self.decoder.decode(Plant.self, from: _data)
+                            let existingIdx = self.userData.plants.firstIndex { existingPlant in
+                                return existingPlant.id == plant.id
+                            }
+
+                            if (existingIdx != nil) {
+                                self.userData.plants[existingIdx!] = plant
+                            } else {
+                                self.userData.plants.append(plant)
+                            }
+                        } catch _ {
+                            print("error fetching plants")
+                        }
+
+                    }
+                }
+        }
+    }
+}
+
+// MARK: Updaters
+extension PlantCareViewModel {
+    func waterPlant(plantId: String) {
+        // TODO
     }
     
-    func mock_insertPlant(_ plant: Plant, _ isNewPlant: Bool) {
-        let currentHouseIdx = getCurrentHouseIdx()
+    func insertPlant(_ plant: Plant, _ isNewPlant: Bool) {
         if (isNewPlant) {
-            userData.houses[currentHouseIdx].plants.append(plant);
-            self.busy = (isBusy: false, text: "")
-            return;
+            db!.collection("plants").addDocument(data: plant.dictionary)
+        } else {
+            db!.collection("plants")
+                .document(plant.id)
+                .setData(plant.dictionary)
         }
-        
-        let (_, plantIdx) = getPlantToUpdate(plantId: plant.id)
-        userData.houses[currentHouseIdx].plants[plantIdx] = plant
+
         self.busy = (isBusy: false, text: "")
+    }
+
+    func savePlant(_ plant: Plant, _ isNewPlant: Bool, _ image: UIImage?) {
+        if (image != nil) {
+            // update image
+            uploadImage(image!, plant, isNewPlant)
+        } else {
+            // user didnt change picture
+            self.insertPlant(plant, isNewPlant)
+        }
+    }
+
+    // MARK: updater helpers
+    func uploadImage(_ image: UIImage, _ plant: Plant, _ isNewPlant: Bool) {
+        // TODO: if image is new but on existing plant, add placeholder image (or from library eventually)
+        self.busy = (isBusy: true, text: "Saving Plant")
+        if let imageData = image.jpegData(compressionQuality: 1) {
+            let storage = Storage.storage()
+            let imageName = UUID().uuidString + ".jpg"
+            let imageRef = storage.reference().child(imageName);
+
+            imageRef.putData(imageData, metadata: nil) { (data, err) in
+                if let err = err {
+                    print("an error has occured - \(err.localizedDescription)")
+                    // TODO error handling
+                    return
+                }
+
+                imageRef.downloadURL { (url, error) in
+                    guard let imageUrl = url else {
+                        // TODO error handling
+                        return
+                    }
+                    let plantWithUrl = Plant(id: plant.id, name: plant.name, lastWatered: plant.lastWatered, waterFrequency: plant.waterFrequency, lastMisted: plant.lastMisted, mistFrequency: plant.mistFrequency, lastFertilized: plant.lastFertilized, fertilizeFrequency: plant.fertilizeFrequency, imageUrl: imageUrl.absoluteString, family: plant.family, waterAmount: plant.waterAmount, sunAmount: plant.sunAmount, temperature: plant.temperature, fertilizerAmount: plant.fertilizerAmount, notes: plant.notes, ownerId: self.userId)
+                    self.insertPlant(plantWithUrl, isNewPlant)
+                }
+            }
+        } else {
+            print("couldnt compress")
+        }
     }
 }
 

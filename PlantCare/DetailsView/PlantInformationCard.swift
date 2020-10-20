@@ -15,6 +15,10 @@ struct PlantInformationCard: View {
     @ObservedObject var editPlantModel: EditPlantViewModel
 
     var body: some View {
+        let plantData = viewModel.userData.plants.first { _plant in
+            return _plant.id == plant.id
+        }!
+
         VStack {
             HStack {
                 Image(systemName: expanded ? "chevron.compact.down" : "chevron.compact.up")
@@ -35,14 +39,14 @@ struct PlantInformationCard: View {
                     VStack(alignment: .leading) {
                         HStack {
                             VStack(alignment: .leading) {
-                                Text("\(plant.name)")
+                                Text("\(plantData.name)")
                                     .font(Font.title.bold())
-                                Text(plant.family)
+                                Text(plantData.family)
                                     .font(.title2)
                                     .foregroundColor(Color.secondary)
                             }
                             Spacer()
-                            NavigationLink(destination: EditPlantView(plant: editPlantModel, viewModel: viewModel, inEditMode: $inEditMode)
+                            NavigationLink(destination: EditPlantView(plant: editPlantModel, viewModel: viewModel, inEditMode: $inEditMode, shouldResetForm: false)
                                     .navigationTitle("")
                                     .navigationBarHidden(true)) {
                                 Image(systemName: "pencil.circle")
@@ -52,19 +56,19 @@ struct PlantInformationCard: View {
                             }
                         }
                         HStack {
-                            PlantRingView(last: plant.lastWatered, frequency: plant.waterFrequency, title: "Water", Icon: Image(systemName: "drop"), onUpdate: {
+                            PlantRingView(last: plant.lastWatered, frequency: plantData.waterFrequency, title: "Water", Icon: Image(systemName: "drop"), onUpdate: {
                                     viewModel.waterPlant(plantId: plant.id)
                                 })
                                 .frame(minWidth: 100)
                             Spacer()
                             Divider()
                             Spacer()
-                            PlantRingView(last: plant.lastMisted, frequency: plant.mistFrequency, title: "Mist", Icon: Image(systemName: "cloud.rain"), onUpdate: { })
+                            PlantRingView(last: plant.lastMisted, frequency: plantData.mistFrequency, title: "Mist", Icon: Image(systemName: "cloud.rain"), onUpdate: { })
                                 .frame(minWidth: 100)
                             Spacer()
                             Divider()
                             Spacer()
-                            PlantRingView(last: plant.lastFertilized, frequency: plant.fertilizeFrequency, title: "Fertilize", Icon: Image(systemName: "leaf"), onUpdate: { })
+                            PlantRingView(last: plant.lastFertilized, frequency: plantData.fertilizeFrequency, title: "Fertilize", Icon: Image(systemName: "leaf"), onUpdate: { })
                                 .frame(minWidth: 100)
                         }
                             .frame(maxHeight: 5150)
@@ -80,7 +84,7 @@ struct PlantInformationCard: View {
                                 Text("Sunlight")
                                     .font(Font.title3.bold())
                                 Spacer()
-                                Text(plant.sunAmount)
+                                Text(plantData.sunAmount)
                             }
                                 .padding()
                             Divider()
@@ -93,7 +97,7 @@ struct PlantInformationCard: View {
                                 Text("Water")
                                     .font(Font.title3.bold())
                                 Spacer()
-                                Text(plant.waterAmount)
+                                Text(plantData.waterAmount)
                             }
                                 .padding()
                             Divider()
@@ -106,7 +110,7 @@ struct PlantInformationCard: View {
                                 Text("Temperature")
                                     .font(Font.title3.bold())
                                 Spacer()
-                                Text(plant.temperature)
+                                Text(plantData.temperature)
                             }
                                 .padding()
                             Divider()
@@ -119,7 +123,7 @@ struct PlantInformationCard: View {
                                 Text("Fertilizer")
                                     .font(Font.title3.bold())
                                 Spacer()
-                                Text(plant.fertilizerAmount)
+                                Text(plantData.fertilizerAmount)
                             }
                                 .padding()
                             Divider()
@@ -127,7 +131,7 @@ struct PlantInformationCard: View {
                             .padding(.bottom)
                         Text("More Information")
                             .font(.title)
-                        if plant.notes.isEmpty {
+                        if plantData.notes.isEmpty {
                             HStack {
                                 Spacer()
                                 VStack {
@@ -140,7 +144,7 @@ struct PlantInformationCard: View {
                                 Spacer()
                             }
                         } else {
-                            Text(plant.notes)
+                            Text(plantData.notes)
                                 .fixedSize(horizontal: false, vertical: true)
                                 .padding(.bottom)
                         }

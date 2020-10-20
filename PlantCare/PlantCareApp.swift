@@ -7,18 +7,22 @@
 
 import SwiftUI
 import Firebase
+import Resolver
 
 @main
 struct PlantCareApp: App {
+    @Injected var authenticationService: AuthenticationService
+
     init() {
         if (!isPreview()) {
             FirebaseApp.configure()
+            authenticationService.signIn()
         }
     }
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(nil)
         }
     }
 }

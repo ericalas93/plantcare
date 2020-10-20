@@ -13,6 +13,7 @@ struct EditPlantView: View {
     @ObservedObject var plant: EditPlantViewModel
     @ObservedObject var viewModel: PlantCareViewModel
     @Binding var inEditMode: Bool
+    var shouldResetForm: Bool = true
 
     @State private var showingImageSourcePicker = false
     @State private var showingImagePicker = false
@@ -144,9 +145,13 @@ struct EditPlantView: View {
                     },
                     trailing:
                         Button("Save") {
-                            let (plant, isNewPlant) = self.plant.save(existingPlants: viewModel.currentHousePlants)
+                            let (plant, isNewPlant) = self.plant.save(existingPlants: viewModel.currentHousePlants, userId: viewModel.userId)
                             viewModel.savePlant(plant, isNewPlant, self.inputImage)
-                            self.plant.resetForm()
+                            if (self.shouldResetForm) {
+                                self.plant.resetForm()
+                            } else {
+                                self.plant.resetDismissal()
+                            }
                             self.presentationMode.wrappedValue.dismiss()
 
                         }.disabled(plant.preventSave)

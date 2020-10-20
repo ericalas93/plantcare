@@ -19,7 +19,7 @@ class EditPlantViewModel: ObservableObject {
     var degrees = ["Celsius", "Fahrenheit"]
     
     var originalPlant: Plant?
-    var id: Int?
+    var id: String?
     
     @Published var temperatureUnitSelection: Int = 1 {
         didSet { updateDismissability() }
@@ -86,12 +86,12 @@ class EditPlantViewModel: ObservableObject {
         self.preventSave = self.name == "" || self.family == "" || self.sunAmount == "" || self.temperature == "" || self.fertilizerAmount == "" || self.waterAmount == ""
     }
 
-    func save(existingPlants: [Plant]) -> (plant: Plant, isNewPlant: Bool) {
+    func save(existingPlants: [Plant], userId: String) -> (plant: Plant, isNewPlant: Bool) {
         let url = isNewPlant ? defaultPlantImage : self.imageUrl
-        let id = self.isNewPlant ? existingPlants.count + 1 : self.id!;
+        let id = self.isNewPlant ? UUID().uuidString : self.id!;
         let tempUnit = self.temperatureUnitSelection == 0 ? "C" : "F"
         let tempComplete = self.temperature + "°" + tempUnit
-        let plant = Plant(id: id, name: self.name, lastWatered: self.lastWatered, waterFrequency: self.waterFrequency + 1, lastMisted: self.lastMisted, mistFrequency: self.mistFrequency + 1, lastFertilized: self.lastFertilized, fertilizeFrequency: self.fertilizeFrequency + 1, imageUrl: url, family: self.family, waterAmount: self.waterAmount, sunAmount: self.sunAmount, temperature: tempComplete, fertilizerAmount: self.fertilizerAmount, notes: self.notes)
+        let plant = Plant(id: id, name: self.name, lastWatered: self.lastWatered, waterFrequency: self.waterFrequency + 1, lastMisted: self.lastMisted, mistFrequency: self.mistFrequency + 1, lastFertilized: self.lastFertilized, fertilizeFrequency: self.fertilizeFrequency + 1, imageUrl: url, family: self.family, waterAmount: self.waterAmount, sunAmount: self.sunAmount, temperature: tempComplete, fertilizerAmount: self.fertilizerAmount, notes: self.notes, ownerId: userId)
         return (plant, isNewPlant)
     }
     
@@ -114,6 +114,11 @@ class EditPlantViewModel: ObservableObject {
         self.isNewPlant = true
         self.attempted = false
         self.preventDismissal = false
+    }
+    
+    func resetDismissal() {
+        self.preventDismissal = false
+        self.attempted = false
     }
 
     init(_ plant: Plant?) {

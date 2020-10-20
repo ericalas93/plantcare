@@ -9,10 +9,7 @@
 /* Begin PBXBuildFile section */
 		10076192252401D400341E01 /* EditPlantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10076191252401D400341E01 /* EditPlantView.swift */; };
 		10076197252402FD00341E01 /* EditPlantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10076196252402FD00341E01 /* EditPlantViewModel.swift */; };
-		1007619D2524D20A00341E01 /* DismissGuardian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1007619C2524D20A00341E01 /* DismissGuardian.swift */; };
-		100761A22524D22D00341E01 /* DismissGuardianUIHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100761A12524D22D00341E01 /* DismissGuardianUIHostingController.swift */; };
-		100761A72524D49C00341E01 /* MockPlant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100761A62524D49C00341E01 /* MockPlant.swift */; };
-		10093AE2251F96D100087D15 /* JSONReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10093AE1251F96D100087D15 /* JSONReader.swift */; };
+		100761A72524D49C00341E01 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100761A62524D49C00341E01 /* MockData.swift */; };
 		101346442528C24F00B0ECAB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 101346432528C24F00B0ECAB /* GoogleService-Info.plist */; };
 		101530182510039900CD0EEA /* PlantCareApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101530172510039900CD0EEA /* PlantCareApp.swift */; };
 		1015301A2510039900CD0EEA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101530192510039900CD0EEA /* ContentView.swift */; };
@@ -25,8 +22,10 @@
 		1015304725102F0800CD0EEA /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1015304625102F0800CD0EEA /* HomeView.swift */; };
 		101530492511040C00CD0EEA /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101530482511040C00CD0EEA /* Modifiers.swift */; };
 		1015304B2511056600CD0EEA /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1015304A2511056600CD0EEA /* SummaryView.swift */; };
-		1049CB1F2520CBED0055E183 /* PlantService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1049CB1E2520CBED0055E183 /* PlantService.swift */; };
+		101AB69C253F2F4100D9E850 /* PlantCareViewModel_mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101AB69B253F2F4100D9E850 /* PlantCareViewModel_mock.swift */; };
 		104DE831251BFA270062FE43 /* Plants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104DE830251BFA270062FE43 /* Plants.swift */; };
+		1050CB4425374A5100E61C3D /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1050CB4325374A5100E61C3D /* AuthenticationService.swift */; };
+		1050CB6825374B6B00E61C3D /* AppDelegate+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1050CB6725374B6B00E61C3D /* AppDelegate+Injection.swift */; };
 		10830BBB251B89110029BC4D /* PlantRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10830BBA251B89110029BC4D /* PlantRingView.swift */; };
 		10A800F625226529000D7780 /* House.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A800F525226529000D7780 /* House.swift */; };
 		10A80104252268B1000D7780 /* PlantCareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A80103252268B1000D7780 /* PlantCareViewModel.swift */; };
@@ -35,7 +34,6 @@
 		10B5B8DD251CEF6A001F7F39 /* PlantInformationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B5B8DC251CEF6A001F7F39 /* PlantInformationCard.swift */; };
 		10B5B8E5251D00E1001F7F39 /* PlantDetailBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B5B8E4251D00E1001F7F39 /* PlantDetailBackButton.swift */; };
 		10C8E9C9251B9F6900AF4AC1 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C8E9C8251B9F6900AF4AC1 /* Utilities.swift */; };
-		10E50F3F25226E0700909E0C /* mockHouses.json in Resources */ = {isa = PBXBuildFile; fileRef = 10A800FA252265F7000D7780 /* mockHouses.json */; };
 		10E9D0C3251A5D0A00CDBE88 /* PlantDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E9D0C2251A5D0A00CDBE88 /* PlantDetailView.swift */; };
 		10E9D0C8251A5D5F00CDBE88 /* PlantListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E9D0C7251A5D5F00CDBE88 /* PlantListItemView.swift */; };
 		10F51E2025276D78005E115F /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F51E1F25276D78005E115F /* ImagePicker.swift */; };
@@ -64,10 +62,7 @@
 /* Begin PBXFileReference section */
 		10076191252401D400341E01 /* EditPlantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantView.swift; sourceTree = "<group>"; };
 		10076196252402FD00341E01 /* EditPlantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantViewModel.swift; sourceTree = "<group>"; };
-		1007619C2524D20A00341E01 /* DismissGuardian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissGuardian.swift; sourceTree = "<group>"; };
-		100761A12524D22D00341E01 /* DismissGuardianUIHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissGuardianUIHostingController.swift; sourceTree = "<group>"; };
-		100761A62524D49C00341E01 /* MockPlant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPlant.swift; sourceTree = "<group>"; };
-		10093AE1251F96D100087D15 /* JSONReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONReader.swift; sourceTree = "<group>"; };
+		100761A62524D49C00341E01 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		101346432528C24F00B0ECAB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		101530142510039900CD0EEA /* PlantCare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlantCare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		101530172510039900CD0EEA /* PlantCareApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCareApp.swift; sourceTree = "<group>"; };
@@ -86,11 +81,12 @@
 		1015304625102F0800CD0EEA /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		101530482511040C00CD0EEA /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		1015304A2511056600CD0EEA /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
-		1049CB1E2520CBED0055E183 /* PlantService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantService.swift; sourceTree = "<group>"; };
+		101AB69B253F2F4100D9E850 /* PlantCareViewModel_mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCareViewModel_mock.swift; sourceTree = "<group>"; };
 		104DE830251BFA270062FE43 /* Plants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plants.swift; sourceTree = "<group>"; };
+		1050CB4325374A5100E61C3D /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		1050CB6725374B6B00E61C3D /* AppDelegate+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Injection.swift"; sourceTree = "<group>"; };
 		10830BBA251B89110029BC4D /* PlantRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantRingView.swift; sourceTree = "<group>"; };
 		10A800F525226529000D7780 /* House.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = House.swift; sourceTree = "<group>"; };
-		10A800FA252265F7000D7780 /* mockHouses.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockHouses.json; sourceTree = "<group>"; };
 		10A80103252268B1000D7780 /* PlantCareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCareViewModel.swift; sourceTree = "<group>"; };
 		10B56AA6252D277A00EBF20A /* PresentationWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationWrapper.swift; sourceTree = "<group>"; };
 		10B5B8DC251CEF6A001F7F39 /* PlantInformationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantInformationCard.swift; sourceTree = "<group>"; };
@@ -159,8 +155,6 @@
 		1007619B2524D1F900341E01 /* DismissGuardian */ = {
 			isa = PBXGroup;
 			children = (
-				1007619C2524D20A00341E01 /* DismissGuardian.swift */,
-				100761A12524D22D00341E01 /* DismissGuardianUIHostingController.swift */,
 				10B56AA6252D277A00EBF20A /* PresentationWrapper.swift */,
 			);
 			path = DismissGuardian;
@@ -169,9 +163,8 @@
 		10093ADB251F966B00087D15 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				10093AE1251F96D100087D15 /* JSONReader.swift */,
-				10A800FA252265F7000D7780 /* mockHouses.json */,
-				100761A62524D49C00341E01 /* MockPlant.swift */,
+				100761A62524D49C00341E01 /* MockData.swift */,
+				101AB69B253F2F4100D9E850 /* PlantCareViewModel_mock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -201,6 +194,7 @@
 		101530162510039900CD0EEA /* PlantCare */ = {
 			isa = PBXGroup;
 			children = (
+				1050CB4225374A3B00E61C3D /* Services */,
 				10F51E1E25276D64005E115F /* Images */,
 				1007619B2524D1F900341E01 /* DismissGuardian */,
 				104DE82F251BFA030062FE43 /* Plants */,
@@ -220,6 +214,7 @@
 				10C8E9C8251B9F6900AF4AC1 /* Utilities.swift */,
 				10076191252401D400341E01 /* EditPlantView.swift */,
 				1001E365252547A800538CAD /* Home */,
+				1050CB6725374B6B00E61C3D /* AppDelegate+Injection.swift */,
 			);
 			path = PlantCare;
 			sourceTree = "<group>";
@@ -256,11 +251,18 @@
 				10A80103252268B1000D7780 /* PlantCareViewModel.swift */,
 				10093ADB251F966B00087D15 /* Mocks */,
 				104DE830251BFA270062FE43 /* Plants.swift */,
-				1049CB1E2520CBED0055E183 /* PlantService.swift */,
 				10A800F525226529000D7780 /* House.swift */,
 				10076196252402FD00341E01 /* EditPlantViewModel.swift */,
 			);
 			path = Plants;
+			sourceTree = "<group>";
+		};
+		1050CB4225374A3B00E61C3D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				1050CB4325374A5100E61C3D /* AuthenticationService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		10B5B8DB251CEF52001F7F39 /* DetailsView */ = {
@@ -409,7 +411,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10E50F3F25226E0700909E0C /* mockHouses.json in Resources */,
 				1015301F2510039A00CD0EEA /* Preview Assets.xcassets in Resources */,
 				101346442528C24F00B0ECAB /* GoogleService-Info.plist in Resources */,
 				1015301C2510039A00CD0EEA /* Assets.xcassets in Resources */,
@@ -540,26 +541,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10093AE2251F96D100087D15 /* JSONReader.swift in Sources */,
 				1015304325100DED00CD0EEA /* FloatingTabbar.swift in Sources */,
 				10F51E2025276D78005E115F /* ImagePicker.swift in Sources */,
 				10E9D0C8251A5D5F00CDBE88 /* PlantListItemView.swift in Sources */,
 				10C8E9C9251B9F6900AF4AC1 /* Utilities.swift in Sources */,
 				10A800F625226529000D7780 /* House.swift in Sources */,
 				1015304B2511056600CD0EEA /* SummaryView.swift in Sources */,
-				1049CB1F2520CBED0055E183 /* PlantService.swift in Sources */,
 				10B5B8DD251CEF6A001F7F39 /* PlantInformationCard.swift in Sources */,
+				1050CB6825374B6B00E61C3D /* AppDelegate+Injection.swift in Sources */,
 				10B5B8E5251D00E1001F7F39 /* PlantDetailBackButton.swift in Sources */,
 				1015301A2510039900CD0EEA /* ContentView.swift in Sources */,
-				100761A22524D22D00341E01 /* DismissGuardianUIHostingController.swift in Sources */,
-				100761A72524D49C00341E01 /* MockPlant.swift in Sources */,
+				1050CB4425374A5100E61C3D /* AuthenticationService.swift in Sources */,
+				101AB69C253F2F4100D9E850 /* PlantCareViewModel_mock.swift in Sources */,
+				100761A72524D49C00341E01 /* MockData.swift in Sources */,
 				104DE831251BFA270062FE43 /* Plants.swift in Sources */,
 				10830BBB251B89110029BC4D /* PlantRingView.swift in Sources */,
 				1015304525102B6B00CD0EEA /* ViewRouter.swift in Sources */,
 				1015304725102F0800CD0EEA /* HomeView.swift in Sources */,
 				10E9D0C3251A5D0A00CDBE88 /* PlantDetailView.swift in Sources */,
 				10076197252402FD00341E01 /* EditPlantViewModel.swift in Sources */,
-				1007619D2524D20A00341E01 /* DismissGuardian.swift in Sources */,
 				101530492511040C00CD0EEA /* Modifiers.swift in Sources */,
 				101530182510039900CD0EEA /* PlantCareApp.swift in Sources */,
 				10B56AA7252D277A00EBF20A /* PresentationWrapper.swift in Sources */,

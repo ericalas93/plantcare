@@ -17,8 +17,12 @@ struct ContentView: View {
     @State var viewSelected : ViewSelected = .home;
     // hide floating tab bar
     @State var inEditMode = false
-    @ObservedObject var userData = PlantCareViewModel()
+    @ObservedObject var userData: PlantCareViewModel
     @ObservedObject var editPlant = EditPlantViewModel(nil)
+    
+    init(_ userData: PlantCareViewModel?) {
+        self.userData = userData ?? PlantCareViewModel()
+    }
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -32,8 +36,19 @@ struct ContentView: View {
     }
 }
 
+struct ContentView_mocked: View {
+    @State var plantCareViewModel = mockPlantViewModel
+    init() {
+        plantCareViewModel.userData = mockUserData
+    }
+    
+    var body: some View {
+        ContentView(plantCareViewModel)
+    }
+}
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView_mocked()
     }
 }

@@ -171,8 +171,13 @@ struct HomeView: View {
 
 struct mock_HomeView: View {
     @State var inEditMode = false
-    @ObservedObject var userData = PlantCareViewModel()
+    @ObservedObject var userData = mockPlantViewModel
     @ObservedObject var editPlant = EditPlantViewModel(nil)
+    
+    init() {
+        userData.userData = mockUserData
+    }
+    
     var body: some View {
         HomeView(inEditMode: $inEditMode, userData: userData, editPlant: editPlant)
     }

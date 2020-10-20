@@ -6,15 +6,13 @@
 //
 
 import Foundation
-import FirebaseFirestoreSwift
 
 struct UserData: Decodable {
-    let userId: String
     var houses: [House]
     var currentHomeId: String?
+    var plants: [Plant] = []
     
     enum CodingKeys: String, CodingKey {
-        case userId
         case houses
         case currentHomeId
     }
@@ -26,13 +24,11 @@ struct House: Decodable, Identifiable {
     let ownerEmail: String?
     let sharedWith: Array<String>?
     var name: String
-    var plants: [Plant]
     
     enum CodingKeys: String, CodingKey {
         case id
         case ownerId
         case name
-        case plants
         case ownerEmail
         case sharedWith
     }
