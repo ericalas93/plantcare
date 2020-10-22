@@ -36,6 +36,8 @@ class AuthenticationService: ObservableObject {
                             "ownerEmail": "",
                             "ownerId": user.uid,
                             "id": user.uid,
+                            "sharedWith": [],
+                            "shareRequests": []
                         ])
                     }
                 }

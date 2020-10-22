@@ -21,7 +21,7 @@ struct ViewRouter: View {
             Text("search")
         }
         if viewSelected == .profile {
-            Text("profile")
+            ProfileView(userData: userData)
         }
     }
 }

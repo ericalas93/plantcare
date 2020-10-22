@@ -23,6 +23,7 @@
 		101530492511040C00CD0EEA /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101530482511040C00CD0EEA /* Modifiers.swift */; };
 		1015304B2511056600CD0EEA /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1015304A2511056600CD0EEA /* SummaryView.swift */; };
 		101AB69C253F2F4100D9E850 /* PlantCareViewModel_mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101AB69B253F2F4100D9E850 /* PlantCareViewModel_mock.swift */; };
+		101C5D70254084D60059EA1B /* ShareHomeInviteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101C5D6F254084D60059EA1B /* ShareHomeInviteView.swift */; };
 		104DE831251BFA270062FE43 /* Plants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104DE830251BFA270062FE43 /* Plants.swift */; };
 		1050CB4425374A5100E61C3D /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1050CB4325374A5100E61C3D /* AuthenticationService.swift */; };
 		1050CB6825374B6B00E61C3D /* AppDelegate+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1050CB6725374B6B00E61C3D /* AppDelegate+Injection.swift */; };
@@ -34,6 +35,7 @@
 		10B5B8DD251CEF6A001F7F39 /* PlantInformationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B5B8DC251CEF6A001F7F39 /* PlantInformationCard.swift */; };
 		10B5B8E5251D00E1001F7F39 /* PlantDetailBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B5B8E4251D00E1001F7F39 /* PlantDetailBackButton.swift */; };
 		10C8E9C9251B9F6900AF4AC1 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C8E9C8251B9F6900AF4AC1 /* Utilities.swift */; };
+		10CBDDCC253F4CA000A40EE0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CBDDCB253F4CA000A40EE0 /* ProfileView.swift */; };
 		10E9D0C3251A5D0A00CDBE88 /* PlantDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E9D0C2251A5D0A00CDBE88 /* PlantDetailView.swift */; };
 		10E9D0C8251A5D5F00CDBE88 /* PlantListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E9D0C7251A5D5F00CDBE88 /* PlantListItemView.swift */; };
 		10F51E2025276D78005E115F /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F51E1F25276D78005E115F /* ImagePicker.swift */; };
@@ -82,6 +84,7 @@
 		101530482511040C00CD0EEA /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		1015304A2511056600CD0EEA /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		101AB69B253F2F4100D9E850 /* PlantCareViewModel_mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCareViewModel_mock.swift; sourceTree = "<group>"; };
+		101C5D6F254084D60059EA1B /* ShareHomeInviteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareHomeInviteView.swift; sourceTree = "<group>"; };
 		104DE830251BFA270062FE43 /* Plants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plants.swift; sourceTree = "<group>"; };
 		1050CB4325374A5100E61C3D /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		1050CB6725374B6B00E61C3D /* AppDelegate+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Injection.swift"; sourceTree = "<group>"; };
@@ -92,6 +95,7 @@
 		10B5B8DC251CEF6A001F7F39 /* PlantInformationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantInformationCard.swift; sourceTree = "<group>"; };
 		10B5B8E4251D00E1001F7F39 /* PlantDetailBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailBackButton.swift; sourceTree = "<group>"; };
 		10C8E9C8251B9F6900AF4AC1 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		10CBDDCB253F4CA000A40EE0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		10E9D0C2251A5D0A00CDBE88 /* PlantDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailView.swift; sourceTree = "<group>"; };
 		10E9D0C7251A5D5F00CDBE88 /* PlantListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantListItemView.swift; sourceTree = "<group>"; };
 		10F51E1F25276D78005E115F /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -187,6 +191,8 @@
 		101530162510039900CD0EEA /* PlantCare */ = {
 			isa = PBXGroup;
 			children = (
+				101C5D6E254083360059EA1B /* Sharing */,
+				10CBDDCA253F4C9100A40EE0 /* Profile */,
 				1050CB4225374A3B00E61C3D /* Services */,
 				10F51E1E25276D64005E115F /* Images */,
 				1007619B2524D1F900341E01 /* DismissGuardian */,
@@ -237,6 +243,14 @@
 			path = PlantCareUITests;
 			sourceTree = "<group>";
 		};
+		101C5D6E254083360059EA1B /* Sharing */ = {
+			isa = PBXGroup;
+			children = (
+				101C5D6F254084D60059EA1B /* ShareHomeInviteView.swift */,
+			);
+			path = Sharing;
+			sourceTree = "<group>";
+		};
 		104DE82F251BFA030062FE43 /* Plants */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,6 +280,14 @@
 				10B5B8E4251D00E1001F7F39 /* PlantDetailBackButton.swift */,
 			);
 			path = DetailsView;
+			sourceTree = "<group>";
+		};
+		10CBDDCA253F4C9100A40EE0 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				10CBDDCB253F4CA000A40EE0 /* ProfileView.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		10F51E1E25276D64005E115F /* Images */ = {
@@ -540,6 +562,8 @@
 				10A800F625226529000D7780 /* House.swift in Sources */,
 				1015304B2511056600CD0EEA /* SummaryView.swift in Sources */,
 				10B5B8DD251CEF6A001F7F39 /* PlantInformationCard.swift in Sources */,
+				10CBDDCC253F4CA000A40EE0 /* ProfileView.swift in Sources */,
+				101C5D70254084D60059EA1B /* ShareHomeInviteView.swift in Sources */,
 				1050CB6825374B6B00E61C3D /* AppDelegate+Injection.swift in Sources */,
 				10B5B8E5251D00E1001F7F39 /* PlantDetailBackButton.swift in Sources */,
 				1015301A2510039900CD0EEA /* ContentView.swift in Sources */,

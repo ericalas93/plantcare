@@ -84,8 +84,10 @@ struct HomeView: View {
                                     .foregroundColor(.black)
                                 Spacer()
                                 Menu {
-                                    Button("Add New Plant") {
-                                        self.addNewPlant = true
+                                    if (self.userData.ownsCurrentHouse) {
+                                        Button("Add New Plant") {
+                                            self.addNewPlant = true
+                                        }
                                     }
                                     Button("View all Plants") {
                                         self.viewAllPlants = true
@@ -122,14 +124,16 @@ struct HomeView: View {
                                         }
                                     }
                                 }
-                                NavigationLink(destination: EditPlantView(plant: editPlant, viewModel: userData, inEditMode: $inEditMode)
-                                        .navigationTitle("")
-                                        .navigationBarHidden(true)) {
-                                    Image(systemName: "plus").foregroundColor(.white)
-                                        .padding()
-                                        .background(Color("GreenDark"))
-                                        .clipShape(Circle())
-                                        .padding()
+                                if (self.userData.ownsCurrentHouse) {
+                                    NavigationLink(destination: EditPlantView(plant: editPlant, viewModel: userData, inEditMode: $inEditMode)
+                                            .navigationTitle("")
+                                            .navigationBarHidden(true)) {
+                                        Image(systemName: "plus").foregroundColor(.white)
+                                            .padding()
+                                            .background(Color("GreenDark"))
+                                            .clipShape(Circle())
+                                            .padding()
+                                    }
                                 }
 
                             }
@@ -173,11 +177,11 @@ struct mock_HomeView: View {
     @State var inEditMode = false
     @ObservedObject var userData = mockPlantViewModel
     @ObservedObject var editPlant = EditPlantViewModel(nil)
-    
+
     init() {
         userData.userData = mockUserData
     }
-    
+
     var body: some View {
         HomeView(inEditMode: $inEditMode, userData: userData, editPlant: editPlant)
     }

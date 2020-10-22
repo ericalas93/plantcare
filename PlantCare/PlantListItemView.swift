@@ -46,20 +46,29 @@ struct PlantListItemView: View {
 
             URLImage(
                 URL(string: plant.imageUrl)!,
-                placeholder: Image("PlantStock"),
+                placeholder: { _ in
+                    ListItemImage(ImageToDisplay: Image("PlantStock"))
+                },
                 content: {
-                    $0.image
-                        .resizable()
-                        .frame(width: 80, height: 80)
-                        .frame(minWidth: 100, minHeight: 100)
-                        .background(Color("GreyLight"))
-                        .cornerRadius(10)
-                        .offset(x: -60, y: 0)
-                        .shadow(color: Color.gray.opacity(0.25), radius: 5, x: 2, y: 2)
+                    ListItemImage(ImageToDisplay: $0.image)
                 }
             )
 
         }
+    }
+}
+
+struct ListItemImage: View {
+    var ImageToDisplay: Image
+    var body: some View {
+        ImageToDisplay
+            .resizable()
+            .frame(width: 80, height: 80)
+            .frame(minWidth: 100, minHeight: 100)
+            .background(Color("GreyLight"))
+            .cornerRadius(10)
+            .offset(x: -60, y: 0)
+            .shadow(color: Color.gray.opacity(0.25), radius: 5, x: 2, y: 2)
     }
 }
 

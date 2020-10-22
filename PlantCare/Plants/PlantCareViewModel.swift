@@ -56,6 +56,13 @@ class PlantCareViewModel: ObservableObject {
         userData.currentHomeId = newCurrentHome!.id
     }
 
+    // MARK: getters
+    func getMyHome() -> House? {
+        return userData.houses.first { house in
+            return house.ownerId == self.userId
+        }
+    }
+
     // MARK: selectors
     var currentHousePlants: [Plant] {
         if (currentHouse == nil) {
@@ -65,6 +72,10 @@ class PlantCareViewModel: ObservableObject {
         return self.userData.plants.filter { plant in
             return plant.ownerId == self.userData.currentHomeId
         }
+    }
+
+    var ownsCurrentHouse: Bool {
+        return self.userId == self.userData.currentHomeId
     }
 
     var houses: [House] {
@@ -79,6 +90,59 @@ class PlantCareViewModel: ObservableObject {
             return house.id == userData.currentHomeId
         }
     }
+
+    var userFirstName: String {
+        let ownerHouse = getMyHome()
+        return ownerHouse?.firstName ?? "User"
+    }
+
+    var userLastName: String {
+        let ownerHouse = getMyHome()
+
+        return ownerHouse?.lastName ?? "User"
+    }
+
+    var userEmail: String {
+        let ownerHouse = getMyHome()
+
+        return ownerHouse?.ownerEmail ?? "example@example.com"
+    }
+
+    var userFullName: String {
+        return "\(self.userFirstName)  \(self.userLastName)"
+    }
+
+    var sharedWith: Array<String> {
+        let ownerHouse = getMyHome()
+
+
+        if (ownerHouse!.sharedWith.count > 0) {
+            return ownerHouse!.sharedWith.map { contact in
+                return contact.email
+            }
+        }
+
+        return []
+    }
+
+    var shareRequests: Array<String> {
+        let ownerHouse = getMyHome()
+
+        if (ownerHouse!.shareRequests.count > 0) {
+            return ownerHouse!.shareRequests.map { contact in
+                return contact.email
+            }
+        }
+
+        return []
+    }
+
+    var userHouseName: String {
+        let ownerHouse = getMyHome()
+
+        return ownerHouse?.name ?? "My House"
+    }
+
 }
 
 extension PlantCareViewModel {
@@ -104,14 +168,14 @@ extension PlantCareViewModel {
 
                     self.userData = UserData(houses: [house], currentHomeId: house.id)
                     self.fetchPlants(for: self.userId)
-                    self.fetchSharedHouses(to: self.userId)
+                    self.fetchSharedHouses(to: ["ownerId": self.userId, "email": house.ownerEmail])
                 } catch _ {
                     print("error fetching user data")
                 }
         }
     }
 
-    func fetchSharedHouses(to currentUser: String) {
+    func fetchSharedHouses(to currentUser: [String: String?]) {
         db!.collection("houses").whereField("sharedWith", arrayContainsAny: [currentUser])
             .addSnapshotListener { querySnapshot, error in
 
@@ -169,7 +233,7 @@ extension PlantCareViewModel {
     func waterPlant(plantId: String) {
         // TODO
     }
-    
+
     func insertPlant(_ plant: Plant, _ isNewPlant: Bool) {
         if (isNewPlant) {
             db!.collection("plants").addDocument(data: plant.dictionary)
@@ -219,6 +283,21 @@ extension PlantCareViewModel {
             }
         } else {
             print("couldnt compress")
+        }
+    }
+
+    func updateHouseName(_ to: String) {
+        let ownerHouse = getMyHome()
+
+        if (ownerHouse!.name != to) {
+            print("updating user's house name from \(ownerHouse!.name) to \(to)")
+            db!.collection("houses").document(self.userId).updateData(["name": to]) { err in
+                if let err = err {
+                    print("Error updating house name: \(err)")
+                } else {
+                    print("Document successfully updated")
+                }
+            }
         }
     }
 }

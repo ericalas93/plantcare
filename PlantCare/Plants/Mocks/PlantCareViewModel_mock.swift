@@ -11,4 +11,5 @@ class PlantCareViewModel_mock: PlantCareViewModel {
     func waterPlant() {}
     func insertPlant() {}
     func savePlant() {}
+    func updateHouseName() {}
 }
