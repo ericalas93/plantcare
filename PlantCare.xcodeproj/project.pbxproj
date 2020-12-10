@@ -10,6 +10,7 @@
 		10076192252401D400341E01 /* EditPlantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10076191252401D400341E01 /* EditPlantView.swift */; };
 		10076197252402FD00341E01 /* EditPlantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10076196252402FD00341E01 /* EditPlantViewModel.swift */; };
 		100761A72524D49C00341E01 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100761A62524D49C00341E01 /* MockData.swift */; };
+		1010E63325431D8D0066D860 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1010E63225431D8D0066D860 /* LocalNotificationManager.swift */; };
 		101346442528C24F00B0ECAB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 101346432528C24F00B0ECAB /* GoogleService-Info.plist */; };
 		101530182510039900CD0EEA /* PlantCareApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101530172510039900CD0EEA /* PlantCareApp.swift */; };
 		1015301A2510039900CD0EEA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101530192510039900CD0EEA /* ContentView.swift */; };
@@ -65,6 +66,7 @@
 		10076191252401D400341E01 /* EditPlantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantView.swift; sourceTree = "<group>"; };
 		10076196252402FD00341E01 /* EditPlantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantViewModel.swift; sourceTree = "<group>"; };
 		100761A62524D49C00341E01 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		1010E63225431D8D0066D860 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		101346432528C24F00B0ECAB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		101530142510039900CD0EEA /* PlantCare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlantCare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		101530172510039900CD0EEA /* PlantCareApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCareApp.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 		101530162510039900CD0EEA /* PlantCare */ = {
 			isa = PBXGroup;
 			children = (
+				106970882541D2C700C0C012 /* Notifications */,
 				101C5D6E254083360059EA1B /* Sharing */,
 				10CBDDCA253F4C9100A40EE0 /* Profile */,
 				1050CB4225374A3B00E61C3D /* Services */,
@@ -269,6 +272,14 @@
 				1050CB4325374A5100E61C3D /* AuthenticationService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		106970882541D2C700C0C012 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				1010E63225431D8D0066D860 /* LocalNotificationManager.swift */,
+			);
+			path = Notifications;
 			sourceTree = "<group>";
 		};
 		10B5B8DB251CEF52001F7F39 /* DetailsView */ = {
@@ -559,6 +570,7 @@
 				10F51E2025276D78005E115F /* ImagePicker.swift in Sources */,
 				10E9D0C8251A5D5F00CDBE88 /* PlantListItemView.swift in Sources */,
 				10C8E9C9251B9F6900AF4AC1 /* Utilities.swift in Sources */,
+				1010E63325431D8D0066D860 /* LocalNotificationManager.swift in Sources */,
 				10A800F625226529000D7780 /* House.swift in Sources */,
 				1015304B2511056600CD0EEA /* SummaryView.swift in Sources */,
 				10B5B8DD251CEF6A001F7F39 /* PlantInformationCard.swift in Sources */,

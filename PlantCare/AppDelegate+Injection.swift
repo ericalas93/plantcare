@@ -11,5 +11,6 @@ import Resolver
 extension Resolver: ResolverRegistering {
     public static func registerAllServices() {
         register { AuthenticationService() }.scope(application)
+        register { LocalNotificationManager() }.scope(application)
     }
 }

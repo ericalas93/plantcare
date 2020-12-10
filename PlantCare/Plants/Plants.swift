@@ -8,6 +8,10 @@
 import Foundation
 import SwiftUI
 
+enum PlantUpdateType {
+    case water, mist, fertilize
+}
+
 struct PlantData: Decodable {
     let owner: String
     let ownerId: String

@@ -81,7 +81,7 @@ struct EditPlantView: View {
                 }
 
                 Section(header: Text("Water Information")) {
-                    DatePicker(selection: $plant.lastWatered, in: ...Date(), displayedComponents: .date) {
+                    DatePicker(selection: $plant.lastWatered, in: ...Date(), displayedComponents: [.date, .hourAndMinute]) {
                         Text("Last Watered")
                     }
                     Picker(selection: self.$plant.waterFrequency, label: Text("Frequency (Days)")) {
@@ -93,7 +93,7 @@ struct EditPlantView: View {
                     TextField("Water Amount", text: $plant.waterAmount)
                 }
                 Section(header: Text("Mist Information")) {
-                    DatePicker(selection: $plant.lastMisted, in: ...Date(), displayedComponents: .date) {
+                    DatePicker(selection: $plant.lastMisted, in: ...Date(), displayedComponents: [.date, .hourAndMinute]) {
                         Text("Last Misted")
                     }
                     Picker(selection: self.$plant.mistFrequency, label: Text("Frequency (Days)")) {
@@ -104,8 +104,8 @@ struct EditPlantView: View {
                     }
                 }
                 Section(header: Text("Fertilizer Information")) {
-                    DatePicker(selection: $plant.lastFertilized, in: ...Date(), displayedComponents: .date) {
-                        Text("Last Misted")
+                    DatePicker(selection: $plant.lastFertilized, in: ...Date(), displayedComponents: [.date, .hourAndMinute]) {
+                        Text("Last Fertilized")
                     }
                     Picker(selection: self.$plant.fertilizeFrequency, label: Text("Frequency (Days)")) {
                         ForEach(0 ..< self.plant.frequencies.count) {

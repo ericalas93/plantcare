@@ -14,6 +14,7 @@ import Resolver
 
 class PlantCareViewModel: ObservableObject {
     @Injected var authenticationService: AuthenticationService
+    @Injected var localNotificationManager: LocalNotificationManager
 
     private var STORAGE_URL = "gs://storagetrial-467d3.appspot.com";
     @Published var userData: UserData = UserData(houses: [House](), currentHomeId: nil)
@@ -213,6 +214,7 @@ extension PlantCareViewModel {
                                 return existingPlant.id == plant.id
                             }
 
+                            self.plantNotification(plant: plant)
                             if (existingIdx != nil) {
                                 self.userData.plants[existingIdx!] = plant
                             } else {
@@ -226,17 +228,88 @@ extension PlantCareViewModel {
                 }
         }
     }
+
+    func plantNotification(plant: Plant) {
+        // TODO:  id is different based on type
+        let waterPlantId = plant.id + "-water"
+//        let mistPlantId = plant.id + "-mist"
+//        let fertilizePlantId = plant.id + "-fertilize"
+        self.localNotificationManager.getNotificationById(id: waterPlantId).subscribe(
+            Subscribers.Sink(
+                receiveCompletion: { _ in },
+                receiveValue: { notification in
+                    self.setNotification(notification: notification, lastDay: plant.lastWatered, frequency: plant.waterFrequency, type: .water, plant: plant)
+                }
+            )
+        )
+    }
+
+    func setNotification(notification: UNNotificationRequest?, lastDay: Date, frequency: Int, type: PlantUpdateType, plant: Plant) {
+        var title: String
+        var id = plant.id
+
+        switch type {
+            case .water:
+                title = "Your plant needs watering"
+                id += "-water"
+            case .mist:
+                title = "Your plant needs misting"
+                id += "-mist"
+            case .fertilize:
+                title = "Your plant needs fertilizing"
+                id += "-fertilize"
+        }
+
+        if(notification == nil) {
+            let dateComponents = self.getNextDate(increment: plant.waterFrequency)
+            self.localNotificationManager.sendNotification(id: id, title: title, subtitle: nil, body: "\"\(plant.name)\" needs a little love!", dateComponents: dateComponents)
+        } else {
+            // update with frequency + last water date iff lastWaterDate + frequency !== notifiction date&time
+            print("notification exists:" )
+            print(notification.debugDescription)
+        }
+    }
 }
 
 // MARK: Updaters
 extension PlantCareViewModel {
     func waterPlant(plantId: String) {
-        // TODO
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        let today = Date()
+        let newLastWaterDate = formatter.string(from: today)
+        
+        db!.collection("plants").document(plantId).updateData(["lastWatered": newLastWaterDate]) { err in
+            if let err = err {
+                print("Error updating house name: \(err)")
+            } else {
+                let plant = self.userData.plants.first { _plant in
+                    return _plant.id == plantId
+                }!
+                let notificationId = plantId + "-water"
+//                let dateComponents = self.getNextDate(increment: plant.waterFrequency)
+                let dateComponents = self.getNextDate(increment: 1)
+
+                self.localNotificationManager.sendNotification(id: notificationId, title: "Your plant needs watering", subtitle: nil, body: "\"\(plant.name)\" needs a little love!", dateComponents: dateComponents)
+                
+            }
+        }
+
+    }
+    
+    func getNextDate(increment: Int) -> DateComponents {
+        let today = Date()
+        let calendar = Calendar.current
+        // TODO: change to days
+        let newNextDate = Calendar.current.date(byAdding: .minute, value: increment, to: today)!
+
+        let dateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: newNextDate)
+        return dateComponents
     }
 
     func insertPlant(_ plant: Plant, _ isNewPlant: Bool) {
         if (isNewPlant) {
-            db!.collection("plants").addDocument(data: plant.dictionary)
+            db!.collection("plants").document(plant.id).setData(plant.dictionary)
         } else {
             db!.collection("plants")
                 .document(plant.id)
